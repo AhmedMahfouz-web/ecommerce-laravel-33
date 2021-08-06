@@ -31,9 +31,7 @@
 
 
 
-    <link rel="stylesheet"
-        href="http://demo.bestprestashoptheme.com/savemart/themes/vinova_savemart/assets/cache/theme-4527f124.css"
-        type="text/css" media="all">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" media="all">
 
 
     <script type="text/javascript">
@@ -294,7 +292,6 @@
         };
         var psr_icon_color = "#F19D76";
         var search_url = "http:\/\/demo.bestprestashoptheme.com\/savemart\/ar\/\u0628\u062d\u062b";
-
     </script>
 
 
@@ -302,7 +299,6 @@
     <script type="text/javascript">
         var baseDir = "/savemart/";
         var static_token = "28add935523ef131c8432825597b9928";
-
     </script>
 
 
@@ -457,9 +453,11 @@
                         </div>
                     </div>
                     <div class="links-currency" data-target="#box-currency" data-titlebox="Currency">
-                        <span>Currency</span><i class="zmdi zmdi-arrow-right"></i></div>
+                        <span>Currency</span><i class="zmdi zmdi-arrow-right"></i>
+                    </div>
                     <div class="links-language" data-target="#box-language" data-titlebox="Language">
-                        <span>Language</span><i class="zmdi zmdi-arrow-right"></i></div>
+                        <span>Language</span><i class="zmdi zmdi-arrow-right"></i>
+                    </div>
                 </div>
             </div>
             <div id="box-currency" class="box-content d-flex">
