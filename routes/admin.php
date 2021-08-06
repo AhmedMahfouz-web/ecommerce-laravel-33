@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 define('PAGINATION_COUNT', '10');
 
-Route::group(['namespace' => 'admin', 'middleware' => 'auth:admin'], function() {
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 
     // Languages Route
-    Route::group(['prefix' => 'languages'], function() {
+    Route::group(['prefix' => 'languages'], function () {
         // Show
         Route::get('/', 'LanguagesController@index')->name('admin.languages');
 
@@ -36,7 +36,7 @@ Route::group(['namespace' => 'admin', 'middleware' => 'auth:admin'], function() 
     });
 
     // Main Categories Routes
-    Route::group(['prefix' => 'main_categories'], function() {
+    Route::group(['prefix' => 'main_categories'], function () {
         // Show
         Route::get('/', 'MainCategoriesController@index')->name('admin.mainCategories');
 
@@ -53,7 +53,7 @@ Route::group(['namespace' => 'admin', 'middleware' => 'auth:admin'], function() 
     });
 });
 
-Route::group(['namespace' => 'admin', 'middleware' => 'guest:admin'], function() {
+Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {
     Route::get('/login', 'LoginController@getLogin')->name('get.admin.login');
     Route::post('/login', 'LoginController@login')->name('admin.login');
 });
