@@ -72,21 +72,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="ThemeMakker">
-    <link rel="icon" href="{{ asset("dashboard/assets/images/brand/logo-33-2-browser-50x50.png") }}"
+    <link rel="icon" href="{{ asset('dashboard/assets/images/brand/logo-33-2-browser-50x50.png') }}"
         type="image/x-icon">
     <title>Admin | @yield('title')</title>
 
-    <link rel="stylesheet" href="{{ asset("dashboard/assets/vendor/themify-icons/themify-icons.css") }}">
-    <link rel="stylesheet" href="{{ asset("dashboard/assets/vendor/fontawesome/css/font-awesome.min.css") }}">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/fontawesome/css/font-awesome.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset("dashboard/assets/css/main.css") }}" type="text/css"">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/css/main.css') }}" type="text/css"">
+    <link rel=" stylesheet" href="{{ asset('dashboard/assets/scss/_custom.scss') }}" type="text/css"">
 </head>
 
 <body class=" theme-indigo">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="m-t-30"><img src="{{ asset("dashboard/assets/images/brand/logo-33-2-browser-50x50.png") }}"
+            <div class="m-t-30"><img src="{{ asset('dashboard/assets/images/brand/logo-33-2-browser-50x50.png') }}"
                     width="48" height="48" alt="ArrOw">
             </div>
             <p>Please wait...</p>
@@ -105,10 +106,10 @@
     </div>
 
     <!-- Javascript -->
-    <script src="{{ asset("dashboard/assets/bundles/libscripts.bundle.js") }}"></script>
-    <script src="{{ asset("dashboard/assets/bundles/vendorscripts.bundle.js") }}"></script>
+    <script src="{{ asset('dashboard/assets/bundles/libscripts.bundle.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/bundles/vendorscripts.bundle.js') }}"></script>
 
-    <script src="{{ asset("dashboard/assets/js/theme.js") }}"></script>
+    <script src="{{ asset('dashboard/assets/js/theme.js') }}"></script>
     </body>
 
 </html>

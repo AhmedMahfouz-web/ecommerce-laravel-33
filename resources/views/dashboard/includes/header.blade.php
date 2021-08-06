@@ -421,9 +421,13 @@
 <nav class="navbar custom-navbar navbar-expand-lg py-2">
     <div class="container-fluid px-0">
         <a href="javascript:void(0);" class="menu_toggle"><i class="fa fa-align-left"></i></a>
-        <a href="index.html" class="navbar-brand"><img src="{{ asset("dashboard/assets/images/brand/33-logo.png") }}"
-                alt="BigBucket" />
-            <strong>ThirtyThree</strong> House</a>
+        <a href="index.html" class="navbar-brand"><img class="mr-3"
+                src="{{ asset('dashboard/assets/images/brand/33-logo.png') }}" alt="BigBucket" />
+            <span class="brand-name">
+                <strong>ThirtyThree</strong>
+                <span>House</span>
+            </span>
+        </a>
         <div id="navbar_main">
             <ul class="navbar-nav mr-auto hidden-xs">
                 <li class="nav-item page-header">
