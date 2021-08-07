@@ -161,7 +161,7 @@
                 <div class="auth-box">
                     <div class="top">
                         <img src="{{ asset('/dashboard/assets/images/brand/33-logo.png') }} alt=" Lucid">
-                        <strong>Big</strong> <span>Bucket</span>
+                        <strong>ThirtyThree</strong> <span>House</span>
                     </div>
                     <div class="card">
                         <div class="header">
