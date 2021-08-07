@@ -87,7 +87,7 @@
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="m-t-30"><img src="{{ asset('dashboard/assets/images/brand/logo-33-2-browser-50x50.png') }}"
+            <div class="m-t-30"><img src="{{ asset('dashboard/assets/images/brand/logo-33-BLACK-PNG-800800.png') }}"
                     width="48" height="48" alt="ArrOw">
             </div>
             <p>Please wait...</p>

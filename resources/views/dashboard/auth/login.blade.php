@@ -150,8 +150,8 @@
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="m-t-30"><img src="{{ asset('dashboard/assets/images/brand/33-logo.png') }}" width="48"
-                    height="48" alt="ArrOw">
+            <div class="m-t-30"><img src="{{ asset('dashboard/assets/images/brand/logo-33-BLACK-PNG-800800.png') }}"
+                    width="48" height="48" alt="ArrOw">
             </div>
             <p>Please wait...</p>
         </div>
@@ -162,7 +162,8 @@
             <div class="vertical-align-middle auth-main">
                 <div class="auth-box">
                     <div class="top">
-                        <img src="{{ asset('dashboard/assets/images/brand/33-logo.png') }}" alt="Logo">
+                        <img src="{{ asset('dashboard/assets/images/brand/logo-33-BLACK-PNG-800800.png') }}"
+                            alt="Logo">
                         <strong>ThirtyThree</strong> <span>House</span>
                     </div>
                     <div class="card">
