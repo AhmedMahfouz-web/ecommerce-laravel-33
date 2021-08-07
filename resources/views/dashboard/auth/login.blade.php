@@ -138,17 +138,17 @@
     <meta name="author" content="ThemeMakker">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>:: BigBucket :: Login</title>
-    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/themify-icons/themify-icons.css') }}>
-    <link rel=" stylesheet" href="{{ asset('dashboard/assets/vendor/fontawesome/css/font-awesome.min.css') }}>
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/themify-icons/themify-icons.css') }}>
+    <link rel=" stylesheet" href="{{ asset('/dashboard/assets/vendor/fontawesome/css/font-awesome.min.css') }}>
 
-    <link rel=" stylesheet" href="{{ asset('dashboard/assets/css/main.css') }} type=" text/css">
+    <link rel=" stylesheet" href="{{ asset('/dashboard/assets/css/main.css') }} type=" text/css">
 </head>
 
 <body class="theme-indigo">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="m-t-30"><img src="{{ asset('dashboard/assets/images/brand/33-logo.png') }} width=" 48"
+            <div class="m-t-30"><img src="{{ asset('/dashboard/assets/images/brand/33-logo.png') }} width=" 48"
                     height="48" alt="ArrOw">
             </div>
             <p>Please wait...</p>
@@ -160,7 +160,7 @@
             <div class="vertical-align-middle auth-main">
                 <div class="auth-box">
                     <div class="top">
-                        <img src="{{ asset('dashboard/assets/images/brand/33-logo.png') }} alt=" Lucid">
+                        <img src="{{ asset('/dashboard/assets/images/brand/33-logo.png') }} alt=" Lucid">
                         <strong>Big</strong> <span>Bucket</span>
                     </div>
                     <div class="card">
@@ -172,7 +172,7 @@
                                 method="POST" novalidate>
                                 @csrf
                                 @include('dashboard.includes.alerts.success')
-                                @include('dashboard.includes.alerts.error')
+                                @include('dashboard.includes.alerts.success')
                                 <div class="form-group">
                                     <label for="signin-email" class="control-label sr-only">Email</label>
                                     <input type="email" class="form-control" id="signin-email"
@@ -200,10 +200,10 @@
     <!-- END WRAPPER -->
 
     <!-- Core -->
-    <script src="{{ asset('dashboard/assets/bundles/libscripts.bundle.js') }}></script>
-    <script src="{{ asset('dashboard/assets/bundles/vendorscripts.bundle.js') }}></script>
+    <script src="{{ asset('/dashboard/assets/bundles/libscripts.bundle.js') }}></script>
+    <script src="{{ asset('/dashboard/assets/bundles/vendorscripts.bundle.js') }}></script>
 
-    <script src="{{ asset('dashboard/assets/js/theme.js') }}></script>
+    <script src="{{ asset('/dashboard/assets/js/theme.js') }}></script>
 </body>
 
 </html>
