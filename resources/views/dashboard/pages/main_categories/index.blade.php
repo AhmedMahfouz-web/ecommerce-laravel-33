@@ -18,6 +18,8 @@
                             <a href={{ route('admin.mainCategories.create') }} class="btn-primary btn float-right"><i
                                     class="fa fa-plus" aria-hidden="true"></i> Add</a>
                         </div>
+                        @include('dashboard.includes.alerts.success')
+                        @include('dashboard.includes.alerts.error')
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">

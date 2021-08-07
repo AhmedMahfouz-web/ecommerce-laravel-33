@@ -97,11 +97,11 @@ class MainCategoriesController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.mainCategories');
+            return redirect()->route('admin.mainCategories')->with(['success' => 'Category has created successfully.']);
         } catch (\Exception $ex) {
 
             DB::rollback();
-            return redirect()->route('admin.mainCategories');
+            return redirect()->route('admin.mainCategories')->with(['error' => 'Somthing went wrong try again later.']);
         } // End Catch
 
     } // End Store Function
@@ -112,7 +112,7 @@ class MainCategoriesController extends Controller
         $category = MainCategories::with('categories')->selection()->find($id);
 
         if (!$category) {
-            return redirect()->route('admin.mainCategories');
+            return redirect()->route('admin.mainCategories')->with(['error' => 'This category doesn\'t exist.']);
         }
 
         return view('dashboard.pages.main_categories.edit', compact('category'));
@@ -124,7 +124,7 @@ class MainCategoriesController extends Controller
             $main_category = MainCategories::find($id);
 
             if (!$main_category) {
-                return redirect()->route('admin.mainCategories');
+                return redirect()->route('admin.mainCategories')->with(['error' => 'This category doesn\'t exist.']);
             }
 
             $filePath = $main_category->photo;
@@ -153,11 +153,11 @@ class MainCategoriesController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.mainCategories');
+            return redirect()->route('admin.mainCategories')->with(['success' => 'Category has updated successfully.']);
         } catch (\Exception $ex) {
 
             DB::rollback();
-            return redirect()->route('admin.mainCategories');
+            return redirect()->route('admin.mainCategories')->with(['error' => 'Somthing went wrong try again later.']);
         } // End Catch
     } // End Update Function
 
