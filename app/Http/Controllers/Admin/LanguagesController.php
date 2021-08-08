@@ -28,7 +28,7 @@ class LanguagesController extends Controller
         try {
             // Insert into database
             $language = Languages::create($request->except(['_token']));
-            return redirect(route('admin.languages'))->with(['success' => 'Language has created successfully.']);
+            return redirect(route('admin.languages'))->with(['success' => 'Language has been created successfully.']);
         } catch (\Exception $ex) {
             return redirect(route('admin.languages'))->with(['error' => 'Somthing went wrong try again later.']);
         }
@@ -59,7 +59,7 @@ class LanguagesController extends Controller
             }
             $language->update($request->except(['_token']));
 
-            return redirect(route('admin.languages'))->with(['success' => 'Language has updated successfully.']);
+            return redirect(route('admin.languages'))->with(['success' => 'Language has been updated successfully.']);
         } catch (\Exception $ex) {
 
             return redirect(route('admin.languages'))->with(['error' => 'Somthing went wrong try again later.']);
@@ -74,7 +74,7 @@ class LanguagesController extends Controller
 
             $language->delete();
 
-            return redirect(route('admin.languages'))->with(['success' => 'Language has deleted successfully.']);
+            return redirect(route('admin.languages'))->with(['success' => 'Language has been deleted successfully.']);
         } catch (\Exception $ex) {
 
             return redirect(route('admin.languages'))->with(['error' => 'Somthing went wrong try again later.']);

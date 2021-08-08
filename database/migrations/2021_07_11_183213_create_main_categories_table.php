@@ -20,7 +20,7 @@ class CreateMainCategoriesTable extends Migration
             $table->string('name', '150');
             $table->string('slug', '150')->nullable();
             $table->string('photo', '100')->nullable();
-            $table->tinyInteger('active')->comment = '0 => inactive, 1 => active';
+            $table->tinyInteger('active')->nullable()->comment = '0 => inactive, 1 => active';
             $table->timestamps();
         });
     }

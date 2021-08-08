@@ -76,11 +76,16 @@
         type="image/x-icon">
     <title>Admin | @yield('title')</title>
 
+    @yield('css')
+
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/fontawesome/css/font-awesome.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/main.css') }}" type="text/css"">
     <link rel=" stylesheet" href="{{ asset('dashboard/assets/scss/_custom.scss') }}" type="text/css"">
+    
+ 
 </head>
 
 <body class=" theme-indigo">
@@ -110,6 +115,7 @@
     <script src="{{ asset('dashboard/assets/bundles/vendorscripts.bundle.js') }}"></script>
 
     <script src="{{ asset('dashboard/assets/js/theme.js') }}"></script>
+    @yield('script')
     </body>
 
 </html>

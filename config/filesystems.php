@@ -51,14 +51,21 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
         'main_category' => [
             'driver' => 'local',
             'root' => base_path('public/images/main_category'),
-            'url' => env('APP_URL').'/public',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
+        'vendors' => [
+            'driver' => 'local',
+            'root' => base_path('public/images/vendors'),
+            'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
 

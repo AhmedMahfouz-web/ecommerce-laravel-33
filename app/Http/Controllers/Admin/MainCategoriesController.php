@@ -97,7 +97,7 @@ class MainCategoriesController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.mainCategories')->with(['success' => 'Category has created successfully.']);
+            return redirect()->route('admin.mainCategories')->with(['success' => 'Category has been created successfully.']);
         } catch (\Exception $ex) {
 
             DB::rollback();
@@ -153,7 +153,7 @@ class MainCategoriesController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.mainCategories')->with(['success' => 'Category has updated successfully.']);
+            return redirect()->route('admin.mainCategories')->with(['success' => 'Category has been updated successfully.']);
         } catch (\Exception $ex) {
 
             DB::rollback();

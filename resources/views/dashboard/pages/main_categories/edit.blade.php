@@ -92,8 +92,8 @@
                                 </div>
                                 <a href="{{ route('admin.mainCategories') }}" class="btn btn-secondary float-right"><i
                                         class="fa fa-close" aria-hidden="true"></i> Cancel</a>
-                                <button type="submit" class="btn btn-primary float-right mr-2"><i class="fa fa-floppy-o"
-                                        aria-hidden="true"></i> Save</button>
+                                <button type="submit" class="btn btn-primary float-right mr-2"><i
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</button>
                             </fieldset>
                         </div>
                     </form>
@@ -180,7 +180,7 @@
                                                         aria-hidden="true"></i>
                                                     Cancel</a>
                                                 <button type="submit" class="btn btn-primary float-right mr-2"><i
-                                                        class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</button>
                                             </fieldset>
                                         </div>
                                     </form>

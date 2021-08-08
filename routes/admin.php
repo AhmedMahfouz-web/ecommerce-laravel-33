@@ -51,6 +51,23 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
         // Delete
         Route::get('/delete/{id}', 'MainCategoriesController@destroy')->name('admin.mainCategories.delete');
     });
+
+    // Vendors Routes
+    Route::group(['prefix' => 'vendors'], function () {
+        // Show
+        Route::get('/', 'VendorController@index')->name('admin.vendors');
+
+        // Create
+        Route::get('/create', 'VendorController@create')->name('admin.vendors.create');
+        Route::post('/store', 'VendorController@store')->name('admin.vendors.store');
+
+        // Edit
+        Route::get('/edit/{id}', 'VendorController@edit')->name('admin.vendors.edit');
+        Route::post('/update/{id}', 'VendorController@update')->name('admin.vendors.update');
+
+        // Delete
+        Route::get('/delete/{id}', 'VendorController@destroy')->name('admin.vendors.delete');
+    });
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {
