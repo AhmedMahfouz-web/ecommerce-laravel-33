@@ -9,7 +9,7 @@ class Vendor extends Model
 {
     use Notifiable;
 
-    protected $table = 'vendors';
+    protected $table = 'vendor';
 
     protected $fillable = [
         'name', 'mobile', 'category_id', 'address', 'email', 'active', 'logo'
