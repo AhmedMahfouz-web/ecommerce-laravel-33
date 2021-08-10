@@ -33,6 +33,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
 
         // Delete
         Route::get('/delete/{id}', 'LanguagesController@destroy')->name('admin.languages.delete');
+
+        // Change status
+        Route::get('/changeStatus/{id}', 'LanguagesController@changeStatus')->name('admin.languages.status');
     });
 
     // Main Categories Routes
@@ -50,6 +53,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
 
         // Delete
         Route::get('/delete/{id}', 'MainCategoriesController@destroy')->name('admin.mainCategories.delete');
+
+        // Change status
+        Route::get('/changeStatus/{id}', 'MainCategoriesController@changeStatus')->name('admin.mainCategories.status');
     });
 
     // Vendors Routes
@@ -67,6 +73,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
 
         // Delete
         Route::get('/delete/{id}', 'VendorController@destroy')->name('admin.vendors.delete');
+
+        // Change status
+        Route::get('/changeStatus/{id}', 'VendorController@changeStatus')->name('admin.vendors.status');
     });
 });
 

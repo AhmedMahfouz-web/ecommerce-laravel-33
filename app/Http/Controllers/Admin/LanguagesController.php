@@ -80,4 +80,28 @@ class LanguagesController extends Controller
             return redirect(route('admin.languages'))->with(['error' => 'Somthing went wrong try again later.']);
         }
     }
+
+    public function changeStatus($id)
+    {
+        try {
+            $language = Languages::find($id);
+
+            if (!$language) {
+                return redirect()->route('admin.languages')->with(['error' => 'This Language doesn\'t exist.']);
+            }
+
+
+            $status = $language->active == 1 ? 0 : 1;
+            $language->update(['active' => $status]);
+
+
+            if ($status == 1) {
+                return redirect(route('admin.languages'))->with(['success' => 'Language has been activated successfully.']);
+            } else {
+                return redirect(route('admin.languages'))->with(['success' => 'Language has been deactivated successfully.']);
+            }
+        } catch (\Exception $ex) {
+            return redirect(route('admin.languages'))->with(['error' => 'Somthing went wrong try again later.']);
+        }
+    }
 }

@@ -52,6 +52,19 @@
                                                     <a href="{{ route('admin.languages.edit', $language->id) }}"
                                                         class="btn btn-secondary mr-1"><i class="fa fa-pencil-square-o"
                                                             aria-hidden="true"></i> Edit</a>
+                                                    @if ($language->active == 1)
+                                                        <a href="{{ route('admin.languages.status', $language->id) }}"
+                                                            class="btn btn-warning mr-1">
+                                                            <i class="far fa-times-circle"></i>
+                                                            Inactivate
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('admin.languages.status', $language->id) }}"
+                                                            class="btn btn-info mr-1">
+                                                            <i class="far fa-check-circle"></i>
+                                                            Activate
+                                                        </a>
+                                                    @endif
                                                     <a href="{{ route('admin.languages.delete', $language->id) }}"
                                                         class="btn btn-danger"><i class="fa fa-trash"
                                                             aria-hidden="true"></i>

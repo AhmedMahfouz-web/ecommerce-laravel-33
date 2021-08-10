@@ -64,6 +64,9 @@
                                         <label class="d-block font-weight-bold" for="email">Email</label>
                                         <input type="text" class="form-control valid" placeholder="Email" name="email"
                                             id="email" aria-required="true" value="{{ $vendor->email }}">
+                                        @error('email')
+                                            <span class=" text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MainCategories;
 use App\Http\Requests\MainCategoryRequest;
+use ArrayObject;
 use Illuminate\Support\Facades\DB;
 
 class MainCategoriesController extends Controller
@@ -130,6 +131,7 @@ class MainCategoriesController extends Controller
             $filePath = $main_category->photo;
             if ($request->has('photo')) {
                 $filePath = uploadImg('main_category', $request->photo);
+                unlink('../public/' . $main_category->photo); // Delete old img
             }
 
             $category = array_values($request->category)[0];
@@ -146,6 +148,7 @@ class MainCategoriesController extends Controller
                 'photo' => $filePath
             ]);
 
+            // Update img in other languages
             if ($request->has('photo')) {
                 MainCategories::where('translation_of', $id)->update([
                     'photo' => $filePath
@@ -161,5 +164,51 @@ class MainCategoriesController extends Controller
         } // End Catch
     } // End Update Function
 
+    public function destroy($id)
+    {
+        try {
+            $category = MainCategories::find($id);
 
+            if (!$category) {
+                return redirect()->route('admin.mainCategories')->with(['error' => 'This category doesn\'t exist.']);
+            }
+
+            if ($category->vendors && $category->vendors->count() > 0) {
+                return redirect()->route('admin.mainCategories')->with(['error' => 'Can\'t delete, This category has Vendors']);
+            }
+
+            unlink('../public/' . $category->photo); // delete img
+
+            $category->delete();
+
+            return redirect(route('admin.mainCategories'))->with(['success' => 'Category has been deleted successfully.']);
+        } catch (\Exception $ex) {
+
+            return redirect(route('admin.mainCategories'))->with(['error' => 'Somthing went wrong try again later.']);
+        }
+    }
+
+    public function changeStatus($id)
+    {
+        try {
+            $category = MainCategories::find($id);
+
+            if (!$category) {
+                return redirect()->route('admin.mainCategories')->with(['error' => 'This category doesn\'t exist.']);
+            }
+
+
+            $status = $category->active == 1 ? 0 : 1;
+            $category->update(['active' => $status]);
+
+            if ($status == 1) {
+                return redirect(route('admin.mainCategories'))->with(['success' => 'Category has been activated successfully.']);
+            } else {
+                return redirect(route('admin.mainCategories'))->with(['success' => 'Category has been deactivated successfully.']);
+            }
+        } catch (\Exception $ex) {
+            return $ex;
+            return redirect(route('admin.mainCategories'))->with(['error' => 'Somthing went wrong try again later.']);
+        }
+    }
 }

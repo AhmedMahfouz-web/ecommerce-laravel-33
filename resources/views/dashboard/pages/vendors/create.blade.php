@@ -22,7 +22,7 @@
                     <div class="content clearfix">
                         <fieldset class="body">
                             <div class="row">
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-lg-6 col-md-6">
                                     <label class="d-block font-weight-bold">Vendor
                                         Logo</label>
                                     <div class="input-group mb-3">
@@ -30,6 +30,7 @@
                                             <label for="inputGroupFile01">
                                                 <span class="btn btn-tertiary">Upload</span>
                                             </label>
+                                            <span id="img-name"></span>
                                         </div>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="inputGroupFile01"
@@ -110,7 +111,7 @@
                                 <div class="col-lg-12 col-md-12">
                                     <label class="d-block font-weight-bold">Status</label>
                                     <label class="toggle-switch">
-                                        <input value="1" type="checkbox" name="active" checked="">
+                                        <input value="1" type="checkbox" name="active">
                                         <span class="toggle-switch-slider rounded-circle"></span>
                                     </label>
                                 </div>
@@ -129,4 +130,13 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    document.getElementById('inputGroupFile01').addEventListener('change', function() {
+        let value = this.value.split('\\');
+        document.getElementById('img-name').innerText = value[value.length - 1];
+    })
+</script>
 @endsection

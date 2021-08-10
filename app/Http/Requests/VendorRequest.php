@@ -26,10 +26,10 @@ class VendorRequest extends FormRequest
         return [
             'img' => 'required_without:id|mimes:jpg,png,jpeg',
             'name' => 'required|string|max:150',
-            'mobile' => 'required',
-            'email' => 'nullable|unique:vendor,email',
+            'mobile' => 'required|unique:vendor' . ',id,',
+            'email' => 'required|email|unique:vendor' . ',id,',
             'address' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required|exists:main_categories,id',
         ];
     }
 
@@ -38,7 +38,9 @@ class VendorRequest extends FormRequest
 
         return [
             'required' => 'This filled is requierd',
-            'unique' => 'This email is used before',
+            'category_id:exists' => 'This category is wrong',
+            'email.unique' => 'This email is used before',
+            'mobile.unique' => 'This number is used before',
         ];
     }
 }
