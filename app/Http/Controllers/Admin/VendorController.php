@@ -81,29 +81,34 @@ class VendorController extends Controller
                 return redirect()->route('admin.vendors')->with(['error' => 'Somthing went wrong try again later.']);
             }
 
-            // Check if the Category is inactive
-            $category = MainCategories::select('active')->find($request->category_id);
-            if ($category->active == 0) {
-                return redirect()->route('admin.vendors')->with(['error' => 'The selected category isn\'t active.']);
-            }
 
-            // Check if active or inactive & if the Category that vendor belongs to is active or inactive
-            if (!$request->has('active')) {
-                $request->request->add(['active' => 0]);
-            } elseif ($vendor->category->active == 0) {
-                return redirect()->route('admin.vendors')->with(['error' => 'Can\'t activate vendor duo to the vendor\'s category isn\'t acitve.']);
-            }
+            // // Check if active or inactive & if the Category that vendor belongs to is active or inactive
+            // if (!$request->has('active')) {
+            //     $request->request->add(['active' => 0]);
+            // } elseif ($vendor->category->active == 0) {
+
+            //     // Check if the Category is inactive
+            //     $category = MainCategories::select('active')->find($request->category_id);
+            //     if ($category->active == 0) {
+            //         return redirect()->route('admin.vendors')->with(['error' => 'The selected category isn\'t active.']);
+            //     }
+
+            //     return redirect()->route('admin.vendors')->with(['error' => 'Can\'t activate vendor duo to the vendor\'s category isn\'t acitve.']);
+            // }
 
             // Upload img
             $filePath = $vendor->logo;
             if ($request->has('img')) {
                 $filePath = uploadImg('vendors', $request->img); // Upload new img
-                unlink('../public/' . $vendor->photo); // Delete old img
             }
             $request->request->add(['logo' => $filePath]);
 
 
             $vendor->update($request->except(['_token', 'img'])); // Update Vendor
+
+            if ($request->has('img')) {
+                unlink('../public/' . $vendor->photo); // Delete old img
+            }
 
             return redirect()->route('admin.vendors')->with(['success' => 'Vendor has been updated succesfully.']);
         } catch (\Exception $ex) {

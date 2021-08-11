@@ -21,9 +21,24 @@ class MainCategories extends Model
         return $query->select('id', 'translation_lang', 'name', 'photo', 'slug', 'active', 'translation_of');
     }
 
+    public function language()
+    {
+        return $this->belongsTo(Languages::class, 'translation_lang', 'abbr');
+    }
+
     public function categories()
     {
-        return $this->hasMany(self::class, 'translation_of');
+        return $this->hasMany(self::class, 'translation_of', 'id');
+    }
+
+    public function main_category()
+    {
+        return $this->belongsTo(self::class, 'translation_of', 'id');
+    }
+
+    public function subCategories()
+    {
+        return $this->hasMany(subCategories::class, 'category_id', 'id');
     }
 
     public function vendors()

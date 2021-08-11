@@ -12,6 +12,7 @@
             <li class="g_heading">Main</li>
             <li><a href="{{ route('admin.dashboard') }}"><i class="ti-home"></i><span>Dashboard</span></a></li>
 
+            {{-- Vendors --}}
             <li>
                 <a href="javascript:void(0)" {{ Request::is('admin/vendors/*') ? 'aria-expanded="true"' : '' }}
                     class="has-arrow"><i class="fas fa-store-alt"></i><span>Vendors</span>
@@ -21,7 +22,7 @@
                     @endphp
 
                 <span class="badge badge @if ($vendors_count==0) badge-danger @elseif($vendors_count > 0 && $vendors_count < 11)
-            badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill mr-3
+                badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill mr-3
                         float-right">
                         {{ $vendors_count }}
                     </span>
@@ -32,6 +33,7 @@
                 </ul>
             </li>
 
+            {{-- Main Categories --}}
             <li>
                 <a href="javascript:void(0)"
                     {{ Request::is('admin/main_categories/*') ? 'aria-expanded="true"' : '' }} class="has-arrow"><i
@@ -44,8 +46,8 @@
                     @endphp
 
                 <span class="badge badge  @if ($categories_count==0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
-                    badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill
-                        mr-3 float-right">
+                badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill mr-3
+                        float-right">
                         {{ $categories_count }}
                     </span>
                 </a>
@@ -55,6 +57,31 @@
                 </ul>
             </li>
 
+            {{-- Sub Categories --}}
+            <li>
+                <a href="javascript:void(0)"
+                    {{ Request::is('admin/sub_categories/*') ? 'aria-expanded="true"' : '' }} class="has-arrow"><i
+                        class="fas fa-th"></i><span>Sub Categories</span>
+
+                    @php
+                        $categories_count = App\Models\SubCategories::where('active', 1)
+                            ->where('translation_lang', get_locale_language())
+                            ->count();
+                    @endphp
+
+                <span class="badge badge  @if ($categories_count==0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
+                badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill mr-3
+                        float-right">
+                        {{ $categories_count }}
+                    </span>
+                </a>
+                <ul {{ Request::is('admin/sub_categories/*') ? 'aria-expanded="true"' : '' }}>
+                    <li><a href="{{ route('admin.subCategories') }}">Show all</a></li>
+                    <li><a href="{{ route('admin.subCategories.create') }}">Add Category</a></li>
+                </ul>
+            </li>
+
+            {{-- Languages --}}
             <li>
                 <a href="javascript:void(0)" {{ Request::is('admin/languages/*') ? 'aria-expanded="true"' : '' }}
                     class="has-arrow"><i class="fa fa-language" aria-hidden="true"></i><span>Languages</span>
@@ -64,8 +91,8 @@
                     @endphp
 
                 <span class="badge badge @if ($languages_count==0) badge-danger @elseif($languages_count > 0 && $languages_count < 11)
-                        badge-primary @elseif($languages_count > 10) badge-success @endif
-                        badge-pill mr-3 float-right">
+                badge-primary @elseif($languages_count > 10) badge-success @endif badge-pill mr-3
+                        float-right">
                         {{ $languages_count }}
                     </span>
                 </a>

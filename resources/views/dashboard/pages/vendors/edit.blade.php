@@ -115,14 +115,14 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-lg-12 col-md-12">
+                                {{-- <div class="col-lg-12 col-md-12">
                                     <label class="d-block font-weight-bold">Status</label>
                                     <label class="toggle-switch">
                                         <input value="1" type="checkbox" name="active"
                                             {{ $vendor->active == 1 ? "checked=''" : '' }}>
                                         <span class="toggle-switch-slider rounded-circle"></span>
                                     </label>
-                                </div>
+                                </div> --}}
                             </div>
                             <a href="{{ route('admin.vendors') }}"
                                 class="btn btn-secondary float-right ml-2">Cancel</a>

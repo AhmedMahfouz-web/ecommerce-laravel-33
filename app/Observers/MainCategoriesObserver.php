@@ -25,12 +25,24 @@ class MainCategoriesObserver
      */
     public function updated(MainCategories $mainCategories)
     {
-        $mainCategories->categories()->update(['active' => $mainCategories->active]);
+        $categories = $mainCategories->categories;
+        foreach ($categories as $category) {
+            if ($category->language->active == 1) {
+                $category->update(['active' => $mainCategories->active]);
+            }
+        }
 
         $vendors =  $mainCategories->vendors;
         foreach ($vendors as $vendor) {
             if ($vendor->active != null || $vendor->active === 0) {
                 $vendor->update(['active' => $mainCategories->active]);
+            }
+        }
+
+        $subCategories = $mainCategories->subCategories;
+        foreach ($subCategories as $subCategory) {
+            if ($subCategory->language->active == 1) {
+                $subCategory->update(['active' => $mainCategories->active]);
             }
         }
     }

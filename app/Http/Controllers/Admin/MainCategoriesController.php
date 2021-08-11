@@ -47,8 +47,8 @@ class MainCategoriesController extends Controller
             }
 
             $active = 0;
-            if (isset($default_category[0]['active'])) {
-                $active = 1;
+            if ($request->has('active')) {
+                $active = $request->active;
             }
 
             DB::beginTransaction();
@@ -73,13 +73,6 @@ class MainCategoriesController extends Controller
             if (isset($categories) && $categories->count()) {
                 $arr = [];
                 foreach ($categories as $index => $category) {
-
-                    //Check active status
-                    if (isset($category['active'])) {
-                        $active = 1;
-                    } else {
-                        $active = 0;
-                    }
 
                     //Set arr values
                     $arr = [
@@ -131,20 +124,18 @@ class MainCategoriesController extends Controller
             $filePath = $main_category->photo;
             if ($request->has('photo')) {
                 $filePath = uploadImg('main_category', $request->photo);
-                unlink('../public/' . $main_category->photo); // Delete old img
             }
 
             $category = array_values($request->category)[0];
 
-            if (!isset($category['active'])) {
-                $category['active'] = 0;
-            }
+            // if (!isset($category['active'])) {
+            //     $category['active'] = 0;
+            // }
 
             DB::beginTransaction();
 
             MainCategories::where('id', $id)->update([
                 'name' => $category['name'],
-                'active' => $category['active'],
                 'photo' => $filePath
             ]);
 
@@ -156,6 +147,11 @@ class MainCategoriesController extends Controller
             }
 
             DB::commit();
+
+            if ($request->has('photo')) {
+                unlink('../public/' . $main_category->photo); // Delete old img
+            }
+
             return redirect()->route('admin.mainCategories')->with(['success' => 'Category has been updated successfully.']);
         } catch (\Exception $ex) {
 
