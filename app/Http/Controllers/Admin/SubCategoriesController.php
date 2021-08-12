@@ -118,14 +118,16 @@ class SubCategoriesController extends Controller
 
     public function edit($id)
     {
-        $main_categories = MainCategories::select('name', 'id')->where('translation_lang', get_locale_language())->get();
-        $sub_categories = SubCategories::select('name', 'id')->where('translation_lang', get_locale_language())->get();
-        $languages = Languages::select('abbr', 'name')->active()->get();
         $category = SubCategories::with('categories')->selection()->find($id);
 
         if (!$category) {
             return redirect()->route('admin.subCategories')->with(['error' => 'This category doesn\'t exist.']);
         }
+
+        $main_categories = MainCategories::select('name', 'id')->where('translation_lang', get_locale_language())->get();
+        $sub_categories = SubCategories::select('name', 'id')->where('translation_lang', get_locale_language())->get();
+        $languages = Languages::select('abbr', 'name')->active()->get();
+
 
         return view('dashboard.pages.sub_categories.edit', compact(['category', 'main_categories', 'sub_categories', 'languages']));
     } // End Edit Function

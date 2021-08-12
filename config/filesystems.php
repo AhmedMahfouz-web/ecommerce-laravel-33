@@ -69,6 +69,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'products' => [
+            'driver' => 'local',
+            'root' => base_path('public/images/products'),
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
+
         'vendors' => [
             'driver' => 'local',
             'root' => base_path('public/images/vendors'),

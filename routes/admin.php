@@ -97,6 +97,26 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function ()
         // Change status
         Route::get('/changeStatus/{id}', 'VendorController@changeStatus')->name('admin.vendors.status');
     });
+
+    // Products Routes
+    Route::group(['prefix' => 'products'], function () {
+        // Show
+        Route::get('/', 'ProductsController@index')->name('admin.products');
+
+        // Create
+        Route::get('/create', 'ProductsController@create')->name('admin.products.create');
+        Route::post('/store', 'ProductsController@store')->name('admin.products.store');
+
+        // Edit
+        Route::get('/edit/{id}', 'ProductsController@edit')->name('admin.products.edit');
+        Route::post('/update/{id}', 'ProductsController@update')->name('admin.products.update');
+
+        // Delete
+        Route::get('/delete/{id}', 'ProductsController@destroy')->name('admin.products.delete');
+
+        // Change status
+        Route::get('/changeStatus/{id}', 'ProductsController@changeStatus')->name('admin.products.status');
+    });
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin'], function () {

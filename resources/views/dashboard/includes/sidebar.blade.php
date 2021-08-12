@@ -22,8 +22,8 @@
                     @endphp
 
                 <span class="badge badge @if ($vendors_count==0) badge-danger @elseif($vendors_count > 0 && $vendors_count < 11)
-                badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill mr-3
-                        float-right">
+                    badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill
+                        mr-3 float-right">
                         {{ $vendors_count }}
                     </span>
                 </a>
@@ -46,8 +46,8 @@
                     @endphp
 
                 <span class="badge badge  @if ($categories_count==0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
-                badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill mr-3
-                        float-right">
+                 badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill
+                        mr-3 float-right">
                         {{ $categories_count }}
                     </span>
                 </a>
@@ -70,14 +70,35 @@
                     @endphp
 
                 <span class="badge badge  @if ($categories_count==0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
-                badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill mr-3
-                        float-right">
+                    badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill
+                        mr-3 float-right">
                         {{ $categories_count }}
                     </span>
                 </a>
                 <ul {{ Request::is('admin/sub_categories/*') ? 'aria-expanded="true"' : '' }}>
                     <li><a href="{{ route('admin.subCategories') }}">Show all</a></li>
                     <li><a href="{{ route('admin.subCategories.create') }}">Add Category</a></li>
+                </ul>
+            </li>
+
+            {{-- Products --}}
+            <li>
+                <a href="javascript:void(0)" {{ Request::is('/admin/products/*') ? 'aria-expanded="true"' : '' }}
+                    class="has-arrow"><i class="fas fa-box-open"></i><span>Products</span>
+
+                    @php
+                        $products_count = App\Models\Product::count();
+                    @endphp
+
+                <span class="badge badge  @if ($products_count==0) badge-danger @elseif($products_count > 0 && $categories_count < 11)
+                     badge-primary @elseif($products_count > 10) badge-success @endif badge-pill
+                        mr-3 float-right">
+                        {{ $products_count }}
+                    </span>
+                </a>
+                <ul {{ Request::is('/admin/products/*') ? 'aria-expanded="true"' : '' }}>
+                    <li><a href="{{ route('admin.products') }}">Show all</a></li>
+                    <li><a href="{{ route('admin.products.create') }}">Add Product</a></li>
                 </ul>
             </li>
 

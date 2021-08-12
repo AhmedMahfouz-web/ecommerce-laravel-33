@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Vendors')
+@section('title', 'Products')
 @section('css')
 <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
@@ -50,7 +50,7 @@
 
 @section('path')
 <li class=" breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i></a></li>
-<li class="breadcrumb-item active"><i class="fas fa-store-alt"></i> Vendors</li>
+<li class="breadcrumb-item active"><i class="fas fa-box-open"></i> Products</li>
 @endsection
 
 @section('content')
@@ -59,67 +59,66 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="header">
-                    <h2>Vendors</h2>
-                    <a href={{ route('admin.vendors.create') }} class="btn-primary btn float-right"><i
+                    <h2>Products</h2>
+                    <a href={{ route('admin.products.create') }} class="btn-primary btn float-right"><i
                             class="fa fa-plus" aria-hidden="true"></i> Add</a>
                 </div>
                 @include('dashboard.includes.alerts.success')
                 @include('dashboard.includes.alerts.error')
                 <div class="body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-hover mb-5" style="width:100%">
+                        <table id="example" class="table table-hover mb-5" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-                                    <th>Logo</th>
+                                    <th>description</th>
+                                    <th>Main Photo</th>
+                                    <th style="width: 200px !important;">Other Photos</th>
+                                    <th>Vendor</th>
                                     <th>Category</th>
-                                    <th>Address</th>
-                                    <th>Status</th>
+                                    <th>Sub Category</th>
+                                    <th>Current Price</th>
+                                    <th>Old Price</th>
+                                    <th>Qty</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @isset($vendors)
-                                    @foreach ($vendors as $key => $vendor)
+                                @isset($products)
+                                    @foreach ($products as $key => $product)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $vendor->name }}</td>
-                                            <td>{{ $vendor->mobile }}</td>
-                                            <td>{{ $vendor->email != null ? $vendor->email : 'No Email.' }}</td>
-                                            <td><img src="{{ asset($vendor->logo) }}" alt="{{ $vendor->name }}"
-                                                    style="height: 70px; width: 70px">
+                                            <td>{{ $product->title }}</td>
+                                            <td style="white-space: normal">{!! Str::limit($product->description, 100) !!}
                                             </td>
-                                            <td>{{ $vendor->category->name }}</td>
-                                            <td>{{ $vendor->address }}</td>
+                                            <td><img src="{{ asset($product->photo) }}" alt="{{ $product->title }}"
+                                                    style="height: 70px; width: 70px"></td>
+                                            <td style="width: 200px !important; white-space: normal;">
+                                                @foreach ($product->other_photos as $photo)
+                                                    <img src="{{ asset($photo->name) }}"
+                                                        style="height: 50px; width: 50px;">
+                                                @endforeach
+                                            </td>
+                                            <td>{{ $product->vendor->name }}</td>
+                                            <td>{{ $product->main_category->name }}</td>
                                             <td>
-                                                @if ($vendor->active == 1)
-                                                    <span class="badge badge-success text-uppercase">Active</span>
+                                                @if ($product->sub_category_id != null || $product->sub_category_id != 0)
+                                                    {{ $product->sub_category->name }}
                                                 @else
-                                                    <span class="badge badge-danger text-uppercase">Not Active</span>
+                                                    <span class="text-secondary">No Sub Category.</span>
                                                 @endif
                                             </td>
+                                            <td>{{ $product->current_price }}</td>
+                                            <td>{{ $product->old_price }}</td>
+                                            <td>{{ $product->qty }}</td>
                                             <td>
-                                                <a href="{{ route('admin.vendors.edit', $vendor->id) }}"
-                                                    class="btn btn-secondary mr-0.5 "><i class="fa fa-pencil-square-o"
-                                                        aria-hidden="true"></i> Edit</a>
-                                                @if ($vendor->active == 1)
-                                                    <a href="{{ route('admin.vendors.status', $vendor->id) }}"
-                                                        class="btn btn-warning mr-1">
-                                                        <i class="far fa-times-circle"></i>
-                                                        Inactivate
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('admin.vendors.status', $vendor->id) }}"
-                                                        class="btn btn-info mr-1 ">
-                                                        <i class="far fa-check-circle"></i>
-                                                        Activate
-                                                    </a>
-                                                @endif
+                                                <a href="{{ route('admin.products.edit', $product->id) }}"
+                                                    class="btn btn-secondary mt-1 mr-0.5 "><i class="fa fa-pencil-square-o"
+                                                        aria-hidden="true"></i> Edit
+                                                </a>
 
-                                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                <button type="button" class="btn btn-danger mt-1" data-toggle="modal"
                                                     data-target="#modal_{{ $key + 1 }}">
                                                     <i class="fa fa-trash" aria-hidden="true"></i> Delete
                                                 </button>
@@ -131,7 +130,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="modal_title_6">Delete
-                                                                    {{ $vendor->name }}!</h5>
+                                                                    {{ $product->name }}!</h5>
                                                                 <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
@@ -141,11 +140,11 @@
                                                                 <div class="py-3 text-center">
                                                                     <i class="fa fa-exclamation-circle fa-4x"></i>
                                                                     <h4 class="heading mt-4">Do you want to delete this
-                                                                        Vendor ?</h4>
+                                                                        Product ?</h4>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a href="{{ route('admin.vendors.delete', $vendor->id) }}"
+                                                                <a href="{{ route('admin.products.delete', $product->id) }}"
                                                                     class="btn btn-dark"><i class="fa fa-trash"
                                                                         aria-hidden="true"></i>
                                                                     Delete</a>

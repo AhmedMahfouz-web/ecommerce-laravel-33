@@ -70,7 +70,7 @@ class MainCategoriesController extends Controller
             });
 
             //Check if there's another language
-            if (isset($categories) && $categories->count()) {
+            if (isset($categories) && $categories->count() > 0) {
                 $arr = [];
                 foreach ($categories as $index => $category) {
 

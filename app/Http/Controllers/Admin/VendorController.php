@@ -16,7 +16,7 @@ class VendorController extends Controller
 {
     public function index()
     {
-        $vendors = Vendor::selection()->paginate(PAGINATION_COUNT);
+        $vendors = Vendor::selection()->paginate(50);
         return view('dashboard.pages.vendors.index', compact('vendors'));
     }
 
@@ -141,7 +141,7 @@ class VendorController extends Controller
             $vendor = Vendor::find($id);
 
             if (!$vendor) {
-                return redirect()->route('admin.vendors')->with(['error' => 'This category doesn\'t exist.']);
+                return redirect()->route('admin.vendors')->with(['error' => 'This Vendor doesn\'t exist.']);
             }
 
             // Check if the Category is inactive
@@ -154,7 +154,11 @@ class VendorController extends Controller
             }
 
 
-            return redirect(route('admin.vendors'))->with(['success' => 'Category has been deleted successfully.']);
+            if ($status == 1) {
+                return redirect(route('admin.vendors'))->with(['success' => 'Vendor has been activated successfully.']);
+            } else {
+                return redirect(route('admin.vendors'))->with(['success' => 'Vendor has been deactivated successfully.']);
+            }
         } catch (\Exception $ex) {
             return redirect(route('admin.vendors'))->with(['error' => 'Somthing went wrong try again later.']);
         }

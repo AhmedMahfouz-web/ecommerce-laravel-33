@@ -82,7 +82,7 @@
                                         <label class="d-block font-weight-bold" for="mobile">Mobile
                                             Number
                                             *</label>
-                                        <input type="text" class="form-control valid" placeholder="Mobile Number"
+                                        <input type="tel" class="form-control valid" placeholder="Mobile Number"
                                             name="mobile" id="mobile" required="" aria-required="true"
                                             value="{{ old('mobile') }}">
                                         @error('mobile')
