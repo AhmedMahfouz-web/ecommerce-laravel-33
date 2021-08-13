@@ -79,7 +79,44 @@
         clear: both;
     }
 
+    .preview-images {
+        width: 100%;
+        display: flex;
+    }
+
+    .preview-images .other-image {
+        position: relative;
+        max-height: 120px !important;
+        max-width: 120px !important;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .preview-images .other-image img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .preview-images .other-image .btn-danger {
+        position: absolute;
+        top: 150%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 0.3s;
+        margin: 0;
+    }
+
+    .preview-images .other-image:hover .btn-danger {
+        top: 50%
+    }
+
+    .preview-images .deleted {
+        display: none;
+    }
+
 </style>
+
 @endsection
 
 @section('path')
@@ -225,6 +262,15 @@
 
                                 <div class="col-lg-12 col-md-12 mt-3">
                                     <label for="other_image">Other Photos</label>
+                                    <div class="preview-images">
+                                        @foreach ($product->other_photos as $photo)
+                                            <div class="other-image" data-image-id="{{ $photo->id }}">
+                                                <img src="{{ asset($photo->name) }}" alt="">
+                                                <button type="button" class="btn btn-danger delete-img-btn"><i
+                                                        class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                     <div>
                                         <a href="javascript:void(0)" onclick="$('#other_image').click()">
                                             <span class="btn btn-tertiary">Upload</span></a>
@@ -319,4 +365,23 @@
         }
     }
 </script>
+
+<script>
+    // Append input field has the deleted image's id.
+    let image_div = document.getElementsByClassName('other-image');
+    let delete_btn = document.getElementsByClassName('delete-img-btn');
+    let input = document.createElement('input');
+    input.setAttribute('name', 'delete[]');
+
+    for (let i = 0; i < image_div.length; i++) {
+        delete_btn[i].addEventListener('click', function() {
+            let id = image_div[i].getAttribute('data-image-id');
+            input.setAttribute('value', id);
+
+            image_div[i].classList.add('deleted');
+            image_div[i].appendChild(input);
+        });
+    }
+</script>
+
 @endsection
