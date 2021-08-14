@@ -101,6 +101,7 @@ class LanguagesController extends Controller
                 return redirect(route('admin.languages'))->with(['success' => 'Language has been deactivated successfully.']);
             }
         } catch (\Exception $ex) {
+            return $ex;
             return redirect(route('admin.languages'))->with(['error' => 'Somthing went wrong try again later.']);
         }
     }

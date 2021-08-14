@@ -45,28 +45,22 @@
                                                 </td>
                                                 <td>
                                                     @if ($category->active == 1)
-                                                        <span class="badge badge-success text-uppercase">Active</span>
+                                                        <a
+                                                            href="{{ route('admin.mainCategories.status', $category->id) }}">
+                                                            <span class="badge badge-success text-uppercase">Active</span>
+                                                        </a>
                                                     @else
-                                                        <span class="badge badge-danger text-uppercase">Inactive</span>
+                                                        <a
+                                                            href="{{ route('admin.mainCategories.status', $category->id) }}">
+                                                            <span class="badge badge-danger text-uppercase">Not
+                                                                Active</span>
+                                                        </a>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.mainCategories.edit', $category->id) }}"
                                                         class="btn btn-secondary mr-1"><i class="fa fa-pencil-square-o"
                                                             aria-hidden="true"></i> Edit</a>
-                                                    @if ($category->active == 1)
-                                                        <a href="{{ route('admin.mainCategories.status', $category->id) }}"
-                                                            class="btn btn-warning mr-1">
-                                                            <i class="far fa-times-circle"></i>
-                                                            Inactivate
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('admin.mainCategories.status', $category->id) }}"
-                                                            class="btn btn-info mr-1">
-                                                            <i class="far fa-check-circle"></i>
-                                                            Activate
-                                                        </a>
-                                                    @endif<!-- Button trigger modal -->
 
                                                     <button type="button" class="btn btn-danger mt-1" data-toggle="modal"
                                                         data-target="#modal_{{ $key + 1 }}">

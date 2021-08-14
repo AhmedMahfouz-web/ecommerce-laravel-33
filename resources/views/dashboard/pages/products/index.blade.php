@@ -7,6 +7,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.6.0/dt-1.10.25/datatables.min.css" />
 
 <style>
+    .page{
+        overflow-x: hidden;
+    }
+
     .dtHorizontalExampleWrapper {
         max-width: 600px;
         margin: 0 auto;

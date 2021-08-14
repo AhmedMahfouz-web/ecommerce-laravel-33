@@ -33,8 +33,10 @@ class LanguagesObserver
 
         foreach ($languages->sub_category as $sub_category) {
             if ($sub_category->main_category->active == $languages->active) {
-                if ($sub_category->sub_categories->active == $languages->active) {
-                    $sub_category->update(['active' => $languages->active]);
+                if ($sub_category->sub_categories) {
+                    if ($sub_category->sub_categories->active == $languages->active) {
+                        $sub_category->update(['active' => $languages->active]);
+                    }
                 }
             }
         }

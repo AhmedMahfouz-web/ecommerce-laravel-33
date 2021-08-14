@@ -7,6 +7,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.6.0/dt-1.10.25/datatables.min.css" />
 
 <style>
+    .page {
+        overflow-x: hidden;
+    }
+
     .dtHorizontalExampleWrapper {
         max-width: 600px;
         margin: 0 auto;
@@ -96,28 +100,19 @@
                                             <td>{{ $vendor->address }}</td>
                                             <td>
                                                 @if ($vendor->active == 1)
-                                                    <span class="badge badge-success text-uppercase">Active</span>
+                                                    <a href="{{ route('admin.vendors.status', $vendor->id) }}">
+                                                        <span class="badge badge-success text-uppercase">Active</span>
+                                                    </a>
                                                 @else
-                                                    <span class="badge badge-danger text-uppercase">Not Active</span>
+                                                    <a href="{{ route('admin.vendors.status', $vendor->id) }}">
+                                                        <span class="badge badge-danger text-uppercase">Not Active</span>
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.vendors.edit', $vendor->id) }}"
                                                     class="btn btn-secondary mr-0.5 "><i class="fa fa-pencil-square-o"
                                                         aria-hidden="true"></i> Edit</a>
-                                                @if ($vendor->active == 1)
-                                                    <a href="{{ route('admin.vendors.status', $vendor->id) }}"
-                                                        class="btn btn-warning mr-1">
-                                                        <i class="far fa-times-circle"></i>
-                                                        Inactivate
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('admin.vendors.status', $vendor->id) }}"
-                                                        class="btn btn-info mr-1 ">
-                                                        <i class="far fa-check-circle"></i>
-                                                        Activate
-                                                    </a>
-                                                @endif
 
                                                 <button type="button" class="btn btn-danger" data-toggle="modal"
                                                     data-target="#modal_{{ $key + 1 }}">

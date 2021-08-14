@@ -96,6 +96,7 @@
     .preview-images .other-image img {
         width: 120px;
         height: 120px;
+        transition: 0.5s;
     }
 
     .preview-images .other-image .btn-danger {
@@ -109,6 +110,10 @@
 
     .preview-images .other-image:hover .btn-danger {
         top: 50%
+    }
+
+    .preview-images .other-image:hover img {
+        opacity: 0.5;
     }
 
     .preview-images .deleted {
@@ -136,6 +141,7 @@
                 <form id="wizard_with_validation" action="{{ route('admin.products.update', $product->id) }}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
                     <div class="content clearfix">
                         <fieldset class="body">
                             <div class="row">
@@ -273,7 +279,7 @@
                                     </div>
                                     <div>
                                         <a href="javascript:void(0)" onclick="$('#other_image').click()">
-                                            <span class="btn btn-tertiary">Upload</span></a>
+                                            <span class="btn btn-tertiary mb-1 mt-3">Upload</span></a>
                                         <input type="file" id="other_image" name="other_image[]" style="display: none;"
                                             class="form-control" multiple>
                                     </div>
@@ -370,11 +376,11 @@
     // Append input field has the deleted image's id.
     let image_div = document.getElementsByClassName('other-image');
     let delete_btn = document.getElementsByClassName('delete-img-btn');
-    let input = document.createElement('input');
-    input.setAttribute('name', 'delete[]');
 
     for (let i = 0; i < image_div.length; i++) {
         delete_btn[i].addEventListener('click', function() {
+            let input = document.createElement('input');
+            input.setAttribute('name', 'delete[]');
             let id = image_div[i].getAttribute('data-image-id');
             input.setAttribute('value', id);
 
