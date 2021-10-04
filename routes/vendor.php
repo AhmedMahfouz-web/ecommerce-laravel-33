@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // define('PAGINATION_COUNT', '10');
 
-Route::domain('{subdomain}.' . config('APP_URL', env('APP_URL')))->group(function () {
+Route::domain('{subdomain}.' . config('asset_url', env('ASSET_URL')))->group(function () {
     Route::group(['namespace' => 'Vendor', 'middleware' => 'auth:vendor'], function () {
         Route::get('/', 'VendorsController@index')->name('vendor.dashboard');
     });

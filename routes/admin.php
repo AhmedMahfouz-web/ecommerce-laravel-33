@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 define('PAGINATION_COUNT', '10');
 
-Route::domain(config('APP_URL', env('APP_URL')))->group(function () {
+Route::domain(config('asset_url', env('ASSET_URL')))->group(function () {
     Route::group(['namespace' => 'Admin', 'middleware' => 'auth:admin'], function () {
         Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 
