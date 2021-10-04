@@ -16,11 +16,14 @@ class CreateVendorsTable extends Migration
         Schema::create('vendor', function (Blueprint $table) {
             $table->id();
             $table->string('name', '150');
+            $table->string('slug', '150');
             $table->string('mobile', '50');
-            $table->string('email', '100')->unique()->nullable();
+            $table->string('email', '100')->unique();
             $table->string('address', '150');
-            $table->integer('category_id', '11')->autoIncrement(false);
             $table->string('logo', '100')->nullable();
+            $table->boolean('verified')->default(false);
+            $table->string('token', '32')->nullable();
+            $table->string('password', '150')->nullable();
             $table->tinyInteger('active')->nullable()->comment = '0 => inactive, 1 => active';
             $table->timestamps();
         });

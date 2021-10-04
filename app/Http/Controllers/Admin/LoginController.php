@@ -21,6 +21,6 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->back()->with(['errors' => 'Credentials is uncorrect']);
+        return redirect()->back()->with(['error' => 'Credentials is uncorrect']);
     }
 }

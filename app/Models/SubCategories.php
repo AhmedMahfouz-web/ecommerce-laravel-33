@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Observers\SubCategoriesObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubCategories extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'translation_lang', 'category_id', 'parent_id', 'translation_of', 'name', 'slug', 'photo', 'active',
     ];

@@ -20,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::selection()->paginate(50);
+        $products = Product::with('main_category')->with('sub_category')->with('vendor')->with('other_photos')->selection()->paginate(25);
         return view('dashboard.pages.products.index', compact('products'));
     }
 

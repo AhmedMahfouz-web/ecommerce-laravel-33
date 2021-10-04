@@ -16,7 +16,7 @@ class SubCategoriesController extends Controller
     public function index()
     {
         $locale_language = get_locale_language();
-        $sub_categories = SubCategories::where('translation_lang', $locale_language)->Selection()->paginate(PAGINATION_COUNT);
+        $sub_categories = SubCategories::where('translation_lang', $locale_language)->Selection()->paginate(25);
 
         return view('dashboard.pages.sub_categories.index', compact('sub_categories'));
     } // End Index function
@@ -67,7 +67,7 @@ class SubCategoriesController extends Controller
             $default_category_id = SubCategories::insertGetId([
                 'translation_lang' => $default_category[0]['translation_lang'],
                 'name' => $default_category[0]['name'],
-                'slug' => $default_category[0]['name'],
+                'slug' => str_replace(' ', '-', strtolower($default_category[0]['name'])),
                 'category_id' => $category_id, // Main Category Id.
                 'translation_of' => 0,
                 'photo' => $filePath,

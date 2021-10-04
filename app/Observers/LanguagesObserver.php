@@ -25,9 +25,11 @@ class LanguagesObserver
      */
     public function updated(Languages $languages)
     {
-        foreach ($languages->main_category as $main_category) {
-            if ($main_category->main_category->active == $languages->active) {
-                $main_category->update(['active' => $languages->active]);
+        if ($languages->main_category->count()) {
+            foreach ($languages->main_category as $main_category) {
+                if ($main_category->category->active == $languages->active) {
+                    $main_category->update(['active' => $languages->active]);
+                }
             }
         }
 

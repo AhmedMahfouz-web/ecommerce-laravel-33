@@ -23,10 +23,14 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            if(Arr::first($this->guards) === 'admin'){
+        $route = $request->route();
+        $subdomain = $route->parameter('subdomain');
+        if (!$request->expectsJson()) {
+            if (Arr::first($this->guards) === 'admin') {
                 return route('get.admin.login');
-            }else{
+            } elseif (Arr::first($this->guards) === 'vendor') {
+                return route('get.vendor.login', compact('subdomain'));
+            } else {
                 return route('login');
             }
         }

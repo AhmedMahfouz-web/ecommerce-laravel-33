@@ -15,7 +15,7 @@ class MainCategoriesController extends Controller
     public function index()
     {
         $locale_language = get_locale_language();
-        $main_categories = MainCategories::where('translation_lang', $locale_language)->Selection()->paginate(PAGINATION_COUNT);
+        $main_categories = MainCategories::where('translation_lang', $locale_language)->Selection()->paginate(25);
 
         return view('dashboard.pages.main_categories.index', compact('main_categories'));
     } // End Index function
@@ -78,7 +78,7 @@ class MainCategoriesController extends Controller
                     $arr = [
                         'translation_lang' => $category['translation_lang'],
                         'name' => $category['name'],
-                        'slug' => $category['name'],
+                        'slug' => str_replace(' ', '-', strtolower($category['name'])),
                         'translation_of' => $default_category_id,
                         'active' => $active,
                         'photo' => $filePath,

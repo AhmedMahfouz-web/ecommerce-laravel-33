@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Observers\MainCategoriesObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MainCategories extends Model
 {
+    use HasFactory;
     protected $fillable = [
-        'trabslation_lang', 'translation_of', 'name', 'slug', 'photo', 'active',
+        'translation_lang', 'translation_of', 'name', 'slug', 'photo', 'active',
     ];
 
     public function scopeActive($query)
@@ -43,7 +45,7 @@ class MainCategories extends Model
 
     public function vendors()
     {
-        return $this->hasMany('App\Models\Vendor', 'category_id', 'id');
+        return $this->hasMany(Vendor::class, 'category_id', 'id');
     }
 
     protected static function boot()

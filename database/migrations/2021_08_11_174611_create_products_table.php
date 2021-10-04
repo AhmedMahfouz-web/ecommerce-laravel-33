@@ -19,11 +19,11 @@ class CreateProductsTable extends Migration
             $table->integer('sub_category_id', '11')->autoIncrement(false)->nullable();
             $table->integer('vendor_id', '11')->autoIncrement(false);
             $table->string('title', '150');
-            $table->string('description');
+            $table->text('description');
             $table->bigInteger('qty')->unsigned();
             $table->bigInteger('current_price')->unsigned();
             $table->bigInteger('old_price')->unsigned()->nullable();
-            $table->string('photo', '100');
+            $table->string('photo', '100')->nullable();
             $table->timestamps();
         });
     }

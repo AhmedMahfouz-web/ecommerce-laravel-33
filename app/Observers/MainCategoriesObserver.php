@@ -32,12 +32,6 @@ class MainCategoriesObserver
             }
         }
 
-        $vendors =  $mainCategories->vendors;
-        foreach ($vendors as $vendor) {
-            if ($vendor->active != null || $vendor->active === 0) {
-                $vendor->update(['active' => $mainCategories->active]);
-            }
-        }
 
         $subCategories = $mainCategories->subCategories;
         foreach ($subCategories as $subCategory) {

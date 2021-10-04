@@ -21,7 +21,8 @@
                         $vendors_count = App\Models\Vendor::where('active', 1)->count();
                     @endphp
 
-                <span class="badge badge @if ($vendors_count==0) badge-danger @elseif($vendors_count > 0 && $vendors_count < 11)
+                    <span
+                        class="badge badge @if ($vendors_count == 0) badge-danger @elseif($vendors_count > 0 && $vendors_count < 11)
                     badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill
                         mr-3 float-right">
                         {{ $vendors_count }}
@@ -36,8 +37,8 @@
             {{-- Main Categories --}}
             <li>
                 <a href="javascript:void(0)"
-                    {{ Request::is('admin/main_categories/*') ? 'aria-expanded="true"' : '' }} class="has-arrow"><i
-                        class="fa fa-th-large" aria-hidden="true"></i><span>Main Categories</span>
+                    {{ Request::is('admin/main_categories/*') ? 'aria-expanded="true"' : '' }}
+                    class="has-arrow"><i class="fa fa-th-large" aria-hidden="true"></i><span>Main Categories</span>
 
                     @php
                         $categories_count = App\Models\MainCategories::where('active', 1)
@@ -45,7 +46,8 @@
                             ->count();
                     @endphp
 
-                <span class="badge badge  @if ($categories_count==0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
+                    <span
+                        class="badge badge  @if ($categories_count == 0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
                  badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill
                         mr-3 float-right">
                         {{ $categories_count }}
@@ -60,8 +62,8 @@
             {{-- Sub Categories --}}
             <li>
                 <a href="javascript:void(0)"
-                    {{ Request::is('admin/sub_categories/*') ? 'aria-expanded="true"' : '' }} class="has-arrow"><i
-                        class="fas fa-th"></i><span>Sub Categories</span>
+                    {{ Request::is('admin/sub_categories/*') ? 'aria-expanded="true"' : '' }}
+                    class="has-arrow"><i class="fas fa-th"></i><span>Sub Categories</span>
 
                     @php
                         $categories_count = App\Models\SubCategories::where('active', 1)
@@ -69,7 +71,8 @@
                             ->count();
                     @endphp
 
-                <span class="badge badge  @if ($categories_count==0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
+                    <span
+                        class="badge badge  @if ($categories_count == 0) badge-danger @elseif($categories_count > 0 && $categories_count < 11)
                     badge-primary @elseif($categories_count > 10) badge-success @endif badge-pill
                         mr-3 float-right">
                         {{ $categories_count }}
@@ -90,7 +93,8 @@
                         $products_count = App\Models\Product::count();
                     @endphp
 
-                <span class="badge badge  @if ($products_count==0) badge-danger @elseif($products_count > 0 && $categories_count < 11)
+                    <span
+                        class="badge badge  @if ($products_count == 0) badge-danger @elseif($products_count > 0 && $categories_count < 11)
                      badge-primary @elseif($products_count > 10) badge-success @endif badge-pill
                         mr-3 float-right">
                         {{ $products_count }}
@@ -111,7 +115,8 @@
                         $languages_count = App\Models\Languages::Active()->count();
                     @endphp
 
-                <span class="badge badge @if ($languages_count==0) badge-danger @elseif($languages_count > 0 && $languages_count < 11)
+                    <span
+                        class="badge badge @if ($languages_count == 0) badge-danger @elseif($languages_count > 0 && $languages_count < 11)
                 badge-primary @elseif($languages_count > 10) badge-success @endif badge-pill mr-3
                         float-right">
                         {{ $languages_count }}

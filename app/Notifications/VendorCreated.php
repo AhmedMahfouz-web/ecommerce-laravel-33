@@ -21,7 +21,7 @@ class VendorCreated extends Notification
      */
     public function __construct(Vendor $vendor)
     {
-        //
+        $this->vendor = $vendor;
     }
 
     /**
@@ -44,14 +44,14 @@ class VendorCreated extends Notification
     public function toMail($notifiable)
     {
         $subject = sprintf('%s: Your account has been created successfully at ', config('app.name'));
-        $greeting = sprintf('Hello ', $notifiable->name);
+        $greeting = sprintf('Hello ', $this->vendor->name);
 
         return (new MailMessage)
             ->subject($subject)
             ->greeting($greeting)
             ->salutation('Yours Faithfully')
             ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
+            ->action('Notification Action', url('/vendor/verify/' . $this->vendor->name . $this->vendor->verifyVendor->token))
             ->line('Thank you for using our application!');
     }
 

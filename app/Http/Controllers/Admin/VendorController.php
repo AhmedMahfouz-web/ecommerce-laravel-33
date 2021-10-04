@@ -10,6 +10,7 @@ use App\Models\Vendor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\VendorCreated;
+use App\Notifications\VendorVerify;
 use PDO;
 
 class VendorController extends Controller
@@ -46,7 +47,7 @@ class VendorController extends Controller
             DB::beginTransaction();
             $vendor = Vendor::create($request->except(['_token', 'img']));
 
-            // Notification::send($vendor, new VendorCreated($vendor));
+            Notification::send($vendor, new VendorCreated($vendor));
 
             DB::commit();
 
@@ -54,6 +55,8 @@ class VendorController extends Controller
         } catch (\Exception $ex) {
 
             DB::rollBack();
+
+            return $ex;
             return redirect()->route('admin.vendors')->with(['error' => 'Somthing went wrong try again later.']);
         } // End Try & Catch
 
@@ -80,21 +83,6 @@ class VendorController extends Controller
             if (!$vendor) {
                 return redirect()->route('admin.vendors')->with(['error' => 'Somthing went wrong try again later.']);
             }
-
-
-            // // Check if active or inactive & if the Category that vendor belongs to is active or inactive
-            // if (!$request->has('active')) {
-            //     $request->request->add(['active' => 0]);
-            // } elseif ($vendor->category->active == 0) {
-
-            //     // Check if the Category is inactive
-            //     $category = MainCategories::select('active')->find($request->category_id);
-            //     if ($category->active == 0) {
-            //         return redirect()->route('admin.vendors')->with(['error' => 'The selected category isn\'t active.']);
-            //     }
-
-            //     return redirect()->route('admin.vendors')->with(['error' => 'Can\'t activate vendor duo to the vendor\'s category isn\'t acitve.']);
-            // }
 
             // Upload img
             $filePath = $vendor->logo;
@@ -161,6 +149,50 @@ class VendorController extends Controller
             }
         } catch (\Exception $ex) {
             return redirect(route('admin.vendors'))->with(['error' => 'Somthing went wrong try again later.']);
+        }
+    }
+
+    public function verify($id)
+    {
+        try {
+            $vendor = Vendor::find($id);
+
+            if ($vendor->verified == 1) {
+                return redirect(route('admin.vendors'))->with(['error' => 'This vendor is verified']);
+            }
+
+            Notification::send($vendor, new VendorVerify($vendor));
+
+
+            return redirect(route('admin.vendors'))->with(['success' => 'Mail has been sent successfully.']);
+        } catch (\Exception $ex) {
+            return $ex;
+            return redirect(route('admin.vendors'))->with(['error' => 'Somthing went wrong try again later.']);
+        }
+    }
+
+    public function verified($slug, $token)
+    {
+        try {
+            $vendor = Vendor::where('token', $token)->first();
+
+            if (!$vendor) {
+                $slug = Vendor::where('slug', $slug)->first();
+                if ($slug->password == null) {
+                    return redirect(route('get.vendor.set_password', $slug->slug))->with(['success' => 'Your account has been verified successfully.']);
+                }
+                return redirect(route('get.vendor.login', $slug->slug))->with('error', 'Your account is already verified!');
+            }
+
+            $vendor->update([
+                'token' => null,
+                'verified' => 1,
+            ]);
+
+            return redirect(route('get.vendor.set_password', $slug->slug))->with(['success' => 'Your account has been verified successfully.']);
+        } catch (\Exception $ex) {
+            return $ex;
+            return redirect(route('get.vendor.login', $slug->slug))->with(['error' => 'Somthing went wrong try again later.']);
         }
     }
 }
