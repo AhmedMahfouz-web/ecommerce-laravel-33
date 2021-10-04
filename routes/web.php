@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::domain(env('APP_URL'))->group(function () {
+Route::domain(config('url', env('APP_URL')))->group(function () {
     Route::get('/', function () {
         return view('front.home');
     });
