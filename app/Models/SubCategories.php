@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubCategories extends Model
 {
+
     use HasFactory;
 
     protected $fillable = [
@@ -48,7 +49,6 @@ class SubCategories extends Model
     {
         return $this->belongsTo(self::class, 'parent_id', 'id');
     }
-
 
     protected static function boot()
     {
