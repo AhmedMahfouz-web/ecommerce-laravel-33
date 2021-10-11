@@ -40,7 +40,7 @@ class MainCategories extends Model
 
     public function subCategories()
     {
-        return $this->hasMany(subCategories::class, 'category_id', 'id');
+        return $this->hasMany(SubCategories::class, 'category_id', 'id');
     }
 
     public function sub_sub_categories()
