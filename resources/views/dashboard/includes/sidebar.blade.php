@@ -18,12 +18,12 @@
                     class="has-arrow"><i class="fas fa-store-alt"></i><span>Vendors</span>
 
                     @php
-                        $vendors_count = App\Models\Vendor::where('active', 1)->count();
+                        $vendors_count = App\Models\Vendor::where('verified', 1)->count();
                     @endphp
 
                     <span
                         class="badge badge @if ($vendors_count == 0) badge-danger @elseif($vendors_count > 0 && $vendors_count < 11)
-                    badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill
+                        badge-primary @elseif($vendors_count > 10) badge-success @endif badge-pill
                         mr-3 float-right">
                         {{ $vendors_count }}
                     </span>

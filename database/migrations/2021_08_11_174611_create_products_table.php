@@ -21,8 +21,8 @@ class CreateProductsTable extends Migration
             $table->string('title', '150');
             $table->text('description');
             $table->bigInteger('qty')->unsigned();
-            $table->double('current_price', 8, 2);
-            $table->double('old_price', 8, 2);
+            $table->decimal('current_price', 8, 2);
+            $table->decimal('old_price', 8, 2);
             $table->string('photo', '100')->nullable();
             $table->timestamps();
         });

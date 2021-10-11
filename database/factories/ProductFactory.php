@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'photo' => $this->faker->imageUrl($width = 640, $height = 480),
             'description' => $this->faker->paragraph($nbSentences = 50, $variableNbSentences = true),
             'current_price' => $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 30000.00),
-            'old_price' => $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = NULL),
+            'old_price' => $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 999999.00),
             'qty' => rand(0, 1000)
         ];
     }

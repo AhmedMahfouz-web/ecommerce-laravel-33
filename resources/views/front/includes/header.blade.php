@@ -58,9 +58,9 @@
                         <div class="search-bar">
                             <select>
                                 <option selected="selected">All Category</option>
-                                <option>watch</option>
-                                <option>mobile</option>
-                                <option>kid’s item</option>
+                                @foreach ($main_categories as $category)
+                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                             <form>
                                 <input name="search" placeholder="Search Products Here....." type="search">
@@ -130,69 +130,36 @@
                         <div class="all-category">
                             <h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
                             <ul class="main-category">
-                                <li><a href="#">New Arrivals <i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                                    <ul class="sub-category">
-                                        <li><a href="#">accessories</a></li>
-                                        <li><a href="#">best selling</a></li>
-                                        <li><a href="#">top 100 offer</a></li>
-                                        <li><a href="#">sunglass</a></li>
-                                        <li><a href="#">watch</a></li>
-                                        <li><a href="#">man’s product</a></li>
-                                        <li><a href="#">ladies</a></li>
-                                        <li><a href="#">westrn dress</a></li>
-                                        <li><a href="#">denim </a></li>
-                                    </ul>
-                                </li>
-                                <li class="main-mega"><a href="#">best selling <i class="fa fa-angle-right"
-                                            aria-hidden="true"></i></a>
-                                    <ul class="mega-menu">
-                                        <li class="single-menu">
-                                            <a href="#" class="title-link">Shop Kid's</a>
-                                            <div class="image">
-                                                <img src="https://via.placeholder.com/225x155" alt="#">
-                                            </div>
-                                            <div class="inner-link">
-                                                <a href="#">Kids Toys</a>
-                                                <a href="#">Kids Travel Car</a>
-                                                <a href="#">Kids Color Shape</a>
-                                                <a href="#">Kids Tent</a>
-                                            </div>
-                                        </li>
-                                        <li class="single-menu">
-                                            <a href="#" class="title-link">Shop Men's</a>
-                                            <div class="image">
-                                                <img src="https://via.placeholder.com/225x155" alt="#">
-                                            </div>
-                                            <div class="inner-link">
-                                                <a href="#">Watch</a>
-                                                <a href="#">T-shirt</a>
-                                                <a href="#">Hoodies</a>
-                                                <a href="#">Formal Pant</a>
-                                            </div>
-                                        </li>
-                                        <li class="single-menu">
-                                            <a href="#" class="title-link">Shop Women's</a>
-                                            <div class="image">
-                                                <img src="https://via.placeholder.com/225x155" alt="#">
-                                            </div>
-                                            <div class="inner-link">
-                                                <a href="#">Ladies Shirt</a>
-                                                <a href="#">Ladies Frog</a>
-                                                <a href="#">Ladies Sun Glass</a>
-                                                <a href="#">Ladies Watch</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">accessories</a></li>
-                                <li><a href="#">top 100 offer</a></li>
-                                <li><a href="#">sunglass</a></li>
-                                <li><a href="#">watch</a></li>
-                                <li><a href="#">man’s product</a></li>
-                                <li><a href="#">ladies</a></li>
-                                <li><a href="#">westrn dress</a></li>
-                                <li><a href="#">denim </a></li>
+
+                                @foreach ($main_categories as $category)
+                                    <li><a href="#">{{ $category->name }}
+                                            @if ($category->subCategories->count())
+                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </a>
+                                        <ul class="sub-category">
+                                            @foreach ($category->subCategories as $sub)
+                                                <li><a href="#">{{ $sub->name }}
+                                                        @if ($sub->sub_sub_categories->count())
+                                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                    </a>
+                                                    <ul class="sub-sub-category">
+                                                        @foreach ($sub->sub_sub_categories as $subSub)
+                                                            <li><a href="#">{{ $subSub->name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @else
+                                                    </a>
+                                            @endif
+                                    </li>
+                                @endforeach
                             </ul>
+                        @else
+                            </a>
+                            @endif
+                            </li>
+                            @endforeach
+                            </ul>
+
                         </div>
                     </div>
                     <div class="col-lg-9 col-12">

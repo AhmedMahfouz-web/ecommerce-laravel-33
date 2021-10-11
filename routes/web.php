@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,20 +15,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::domain(env('APP_URL'))->group(function () {
-    Route::get('/', function () {
-        return view('front.home');
-    });
+    Route::get('/', [HomeController::class, 'home']);
 
     Route::get('/cart', 'CartController@index');
 
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::group(['namespace' => 'vendor'], function () {
-        Route::get('/vendor/register', 'Auth\AuthController@get_registration')->name('get.vendor.registration');
-        Route::post('/vendor/register', 'Auth\AuthController@registration')->name('vendor.registration');
-    });
+    Route::group(['prefix' => 'vendor'], function () {
 
-    // Verify
-    Route::get('admin/vendors/verify/{id}', 'Admin\VendorController@verify')->name('admin.vendors.verify');
-    Route::get('admin/vendors/verify/{name}/{token}', 'Admin\VendorController@verified')->name('admin.vendors.verified');
+        //Vendor Registraiton
+        Route::group(['namespace' => 'vendor'], function () {
+            Route::get('register', 'Auth\AuthController@get_registration')->name('get.vendor.registration');
+            Route::post('register', 'Auth\AuthController@registration')->name('vendor.registration');
+        });
+
+        // Verify
+        Route::group(['namespace' => 'admin'], function () {
+            Route::get('vendors/verify/{id}', 'VendorController@verify')->name('admin.vendors.verify');
+            Route::get('vendors/verify/{name}/{token}', 'VendorController@verified')->name('admin.vendors.verified');
+        });
+    });
 });

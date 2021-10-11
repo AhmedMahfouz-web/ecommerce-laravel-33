@@ -43,6 +43,21 @@ class MainCategories extends Model
         return $this->hasMany(subCategories::class, 'category_id', 'id');
     }
 
+    public function sub_sub_categories()
+    {
+        return $this->hasManyThrough(SubCategories::class, SubCategories::class, 'category_id', 'parent_id', 'id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+
+    public function home_products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id')->get(5);
+    }
+
     public function vendors()
     {
         return $this->hasMany(Vendor::class, 'category_id', 'id');
