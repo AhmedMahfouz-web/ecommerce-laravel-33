@@ -46,6 +46,13 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
+    @yield('style')
+    <style>
+        .header.shop .search-bar form {
+            width: auto;
+        }
+
+    </style>
 
 </head>
 
@@ -57,37 +64,40 @@
 
 
     <!-- Jquery -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-migrate-3.0.0.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <!-- Popper JS -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- Color JS -->
-    <script src="js/colors.js"></script>
+    <script src="{{ asset('js/colors.js') }}"></script>
     <!-- Slicknav JS -->
-    <script src="js/slicknav.min.js"></script>
+    <script src="{{ asset('js/slicknav.min.js') }}"></script>
     <!-- Owl Carousel JS -->
-    <script src="js/owl-carousel.js"></script>
+    <script src="{{ asset('js/owl-carousel.js') }}"></script>
     <!-- Magnific Popup JS -->
-    <script src="js/magnific-popup.js"></script>
+    <script src="{{ asset('js/magnific-popup.js') }}"></script>
     <!-- Waypoints JS -->
-    <script src="js/waypoints.min.js"></script>
+    <script src="{{ asset('js/waypoints.min.js') }}"></script>
     <!-- Countdown JS -->
-    <script src="js/finalcountdown.min.js"></script>
+    <script src="{{ asset('js/finalcountdown.min.js') }}"></script>
     <!-- Nice Select JS -->
-    <script src="js/nicesellect.js"></script>
+    <script src="{{ asset('js/nicesellect.js') }}"></script>
     <!-- Flex Slider JS -->
-    <script src="js/flex-slider.js"></script>
+    <script src="{{ asset('js/flex-slider.js') }}"></script>
     <!-- ScrollUp JS -->
-    <script src="js/scrollup.js"></script>
+    <script src="{{ asset('js/scrollup.js') }}"></script>
     <!-- Onepage Nav JS -->
-    <script src="js/onepage-nav.min.js"></script>
+    <script src="{{ asset('js/onepage-nav.min.js') }}"></script>
     <!-- Easing JS -->
-    <script src="js/easing.js"></script>
+    <script src="{{ asset('js/easing.js') }}"></script>
     <!-- Active JS -->
-    <script src="js/active.js"></script>
+    <script src="{{ asset('js/active.js') }}"></script>
+    <!-- Notification -->
+    <script src={{ asset('js/bootstrap-notify.min.js') }}></script>
+    @yield('javascript')
 </body>
 
 </html>

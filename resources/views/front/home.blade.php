@@ -78,7 +78,7 @@
                         <div class="tab-content" id="myTabContent">
                             <!-- Start Single Tab -->
                             @foreach ($main_categories as $index => $category)
-                                <div class="tab-pane fade show @if ($index == 1) active @endif" id="{{ $category->slug }}"
+                                <div class="tab-pane fade show @if ($index == 0) active @endif" id="{{ $category->slug }}"
                                     role="tabpanel">
                                     <div class="tab-single">
                                         <div class="row">
@@ -87,7 +87,7 @@
                                                 <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                                                     <div class="single-product">
                                                         <div class="product-img">
-                                                            <a href="product-details.html">
+                                                            <a href="{{ route('product', $product->slug) }}">
                                                                 <img class="default-img" src="{{ $product->photo }}"
                                                                     alt="#">
                                                                 <img class="hover-img" src="{{ $product->photo }}"
@@ -107,12 +107,14 @@
                                                                             Compare</span></a>
                                                                 </div>
                                                                 <div class="product-action-2">
-                                                                    <a title="Add to cart" href="#">Add to cart</a>
+                                                                    <a title="Add to cart" class="add-to-cart"
+                                                                        href="/add_to_cart/{{ $product->slug }}">Add to
+                                                                        cart</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="product-content">
-                                                            <h3><a href="product-details.html">{{ $product->name }}</a>
+                                                            <h3><a href="product-details.html">{{ $product->title }}</a>
                                                             </h3>
                                                             <div class="product-price">
                                                                 <span>{{ number_format($product->current_price) }}
@@ -121,7 +123,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             @endforeach
                                         </div>
                                     </div>
@@ -650,6 +651,37 @@
             </div>
         </div>
     </section>
-    <!-- End Shop News
+    <!-- End Shop News -->
 
+@endsection
+
+
+@section('javascript')
+    <script>
+        const add_to_cart_btns = document.querySelectorAll('.add-to-cart');
+
+        add_to_cart_btns.forEach(add_to_cart => {
+            add_to_cart.addEventListener('click',
+                function send_to_cart(e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: 'GET',
+                        url: this.getAttribute('href'),
+                        success: function(data) {
+                            $.notify(data.response, {
+                                delay: 1000,
+                                timer: 1500,
+                                animate: {
+                                    enter: 'animated bounceIn',
+                                    exit: 'animated bounceOut'
+                                },
+                                type: 'danger',
+                                newest_on_top: true,
+                            }, );
+                        }
+                    });
+                })
+        });
+    </script>
 @endsection

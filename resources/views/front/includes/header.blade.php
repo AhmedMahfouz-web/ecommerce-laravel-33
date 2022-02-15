@@ -35,7 +35,7 @@
                 <div class="col-lg-2 col-md-2 col-12">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                        <a href="/"><img src="{{ asset('images/logo.png') }}" alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
                     <!-- Search Form -->
@@ -56,14 +56,20 @@
                 <div class="col-lg-8 col-md-7 col-12">
                     <div class="search-bar-top">
                         <div class="search-bar">
-                            <select>
-                                <option selected="selected">All Category</option>
-                                @foreach ($main_categories as $category)
-                                    <option value="{{ $category->name }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            <form>
-                                <input name="search" placeholder="Search Products Here....." type="search">
+                            <form id="search-form" action="{{ route('home') }}" method="GET">
+                                <select name="category">
+                                    <option @if (isset($category_id)) @if ($category_id != 0) @else selected="selected"@endif @endif value='0'>All Category</option>
+                                    @foreach ($main_categories as $category)
+                                        <option @if (isset($category_id)) @if ($category_id == $category->id) selected='selected' @endif @endif value="{{ $category->id }}">
+                                            {{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if (isset($search))
+                                    <input name="search" placeholder="Search Products Here....."
+                                        value="{{ $search }}" type="search">
+                                @else
+                                    <input name="search" placeholder="Search Products Here....." type="search">
+                                @endif
                                 <button class="btnn"><i class="ti-search"></i></button>
                             </form>
                         </div>

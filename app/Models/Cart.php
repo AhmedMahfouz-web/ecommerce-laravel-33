@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $table = 'cart';
+    protected $table = 'carts';
+
+    protected $fillable = ['user_id'];
 
     public function user()
     {

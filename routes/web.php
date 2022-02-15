@@ -15,16 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::domain(env('APP_URL'))->group(function () {
-    Route::get('/', [HomeController::class, 'home']);
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('/cart', 'CartController@index');
+    Route::get('/add_to_cart/{product}', 'CartController@add_to_cart')->name('add_to_cart');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/product/{product}', [HomeController::class, 'product'])->name('product');
+
+
+
 
     Route::group(['prefix' => 'vendor'], function () {
-
         //Vendor Registraiton
-        Route::group(['namespace' => 'vendor'], function () {
+        Route::group(['namespace' => 'Vendor'], function () {
             Route::get('register', 'Auth\AuthController@get_registration')->name('get.vendor.registration');
             Route::post('register', 'Auth\AuthController@registration')->name('vendor.registration');
         });

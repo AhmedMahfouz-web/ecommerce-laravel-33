@@ -15,20 +15,36 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function home()
+    public function home(Request $request)
     {
-        $locale_language = get_locale_language();
-        $main_categories = MainCategories::with('subCategories')
-            ->with(
-                ['products' => function ($q) {
-                    $q->select('*')->take(20);
-                }]
-            )
-            ->where('translation_lang', $locale_language)
-            ->active()
-            ->select('id', 'name', 'slug')
-            ->get();
-        // dd($main_categories);
-        return view('front.home', compact(['main_categories']));
+        if($request->search){
+            $search = $request->search;
+
+            $products = Product::where(
+            'title', 'Like', '%' . $search . '%'
+            );
+
+            $category_id = $request->category;
+
+            if($category_id != 0){
+                $products = $products->where('category_id', $category_id);
+            }
+
+            $products = $products->paginate(50);
+
+            return view('front.pages.search', compact(['products', 'search', 'category_id']));
+        }
+        return view('front.home');
+    }
+
+    public function product($slug)
+    {
+        $product = Product::with(['main_category', 'vendor'])->where('slug', $slug)->first();
+
+        return view('front.pages.product', compact(['product']));
+    }
+
+    public function search(){
+        
     }
 }

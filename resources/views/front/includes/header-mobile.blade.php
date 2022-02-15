@@ -3,7 +3,8 @@
         <div id="_mobile_mainmenu" class="item-mobile-top"><i class="material-icons d-inline">menu</i></div>
         <div class="mobile_logo ml-auto mr-auto">
             <a href="http://demo.bestprestashoptheme.com/savemart/">
-                <img class="logo-mobile img-fluid" src="/savemart/modules/novthemeconfig/images/logo-mobile.png"
+                <img class="logo-mobile img-fluid"
+                    src="{{ asset('savemart/modules/novthemeconfig/images/logo-mobile.png') }}"
                     alt="Prestashop_Savemart">
             </a>
         </div>

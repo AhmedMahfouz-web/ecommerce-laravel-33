@@ -4,7 +4,8 @@
             <div id="_desktop_logo"
                 class="contentsticky_logo d-flex align-items-center justify-content-start col-lg-3 col-md-3">
                 <a href="http://demo.bestprestashoptheme.com/savemart/">
-                    <img class="logo img-fluid" src="/savemart/modules/novthemeconfig/images/logos/logo-1.png"
+                    <img class="logo img-fluid"
+                        src="{{ asset('savemart/modules/novthemeconfig/images/logos/logo-1.png') }}"
                         alt="Prestashop_Savemart">
                 </a>
             </div>

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -21,12 +22,14 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->word($nb = rand(4, 15));
         return [
-            'title' => $this->faker->word,
+            'title' => Str::ucfirst($title),
+            'slug' => str_replace(' ', '-', strtolower($title)),
             'vendor_id' => rand(1, 100),
             'category_id' => rand(1, 50),
             'sub_category_id' => rand(0, 100),
-            'photo' => $this->faker->imageUrl($width = 640, $height = 480),
+            'photo' => $this->faker->imageUrl($width = 550, $height = 750, $category = 'shop'),
             'description' => $this->faker->paragraph($nbSentences = 50, $variableNbSentences = true),
             'current_price' => $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 30000.00),
             'old_price' => $this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 999999.00),

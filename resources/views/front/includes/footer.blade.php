@@ -7,7 +7,7 @@
                     <!-- Single Widget -->
                     <div class="single-footer about">
                         <div class="logo">
-                            <a href="index.html"><img src="images/logo2.png" alt="#"></a>
+                            <a href="index.html"><img src="{{ asset('images/logo2.png') }}" alt="#"></a>
                         </div>
                         <p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,
                             magna
@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="right">
-                            <img src="images/payments.png" alt="#">
+                            <img src="{{ asset('images/payments.png') }}" alt="#">
                         </div>
                     </div>
                 </div>
