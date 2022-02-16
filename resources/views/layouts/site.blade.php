@@ -52,6 +52,24 @@
             width: auto;
         }
 
+        .animated {
+            -webkit-animation-duration: calc(1s * 0.5);
+            animation-duration: calc(1s * 0.5);
+        }
+
+        .alert.alert-success {
+            background-color: #1BC5BD;
+            border-color: #1BC5BD;
+            color: #ffffff;
+        }
+
+        .alert[data-notify] {
+            min-width: 300px;
+            width: auto;
+            border-radius: 0.5rem;
+            font-size: 14px
+        }
+
     </style>
 
 </head>

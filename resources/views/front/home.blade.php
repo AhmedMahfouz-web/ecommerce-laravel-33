@@ -1,7 +1,6 @@
 @extends('layouts.site')
 
 @section('content')
-
     <!-- Slider Area -->
     @include('front.includes.slider')
     <!--/ End Slider Area -->
@@ -68,7 +67,8 @@
                             <!-- Tab Nav -->
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 @foreach ($main_categories as $index => $category)
-                                    <li class="nav-item"><a class="nav-link @if ($index == 0) active @endif"
+                                    <li class="nav-item"><a
+                                            class="nav-link @if ($index == 0) active @endif"
                                             data-toggle="tab" href="#{{ $category->slug }}"
                                             role="tab">{{ $category->name }}</a></li>
                                 @endforeach
@@ -78,8 +78,8 @@
                         <div class="tab-content" id="myTabContent">
                             <!-- Start Single Tab -->
                             @foreach ($main_categories as $index => $category)
-                                <div class="tab-pane fade show @if ($index == 0) active @endif" id="{{ $category->slug }}"
-                                    role="tabpanel">
+                                <div class="tab-pane fade show @if ($index == 0) active @endif"
+                                    id="{{ $category->slug }}" role="tabpanel">
                                     <div class="tab-single">
                                         <div class="row">
 
@@ -652,7 +652,6 @@
         </div>
     </section>
     <!-- End Shop News -->
-
 @endsection
 
 
@@ -670,13 +669,13 @@
                         url: this.getAttribute('href'),
                         success: function(data) {
                             $.notify(data.response, {
-                                delay: 1000,
-                                timer: 1500,
+                                delay: 500,
+                                timer: 2000,
                                 animate: {
                                     enter: 'animated bounceIn',
                                     exit: 'animated bounceOut'
                                 },
-                                type: 'danger',
+                                type: 'success',
                                 newest_on_top: true,
                             }, );
                         }

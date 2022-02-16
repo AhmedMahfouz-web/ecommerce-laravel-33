@@ -22,7 +22,7 @@ Route::domain(env('APP_URL'))->group(function () {
 
     Route::get('/product/{product}', [HomeController::class, 'product'])->name('product');
 
-
+    Route::get('/cart', [HomeController::class, 'get_cart'])->name('get_cart');
 
 
     Route::group(['prefix' => 'vendor'], function () {

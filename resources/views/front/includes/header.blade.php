@@ -44,6 +44,7 @@
                         <!-- Search Form -->
                         <div class="search-top">
                             <form class="search-form">
+                                @csrf
                                 <input type="text" placeholder="Search here..." name="search">
                                 <button value="search" type="submit"><i class="ti-search"></i></button>
                             </form>
@@ -58,9 +59,13 @@
                         <div class="search-bar">
                             <form id="search-form" action="{{ route('home') }}" method="GET">
                                 <select name="category">
-                                    <option @if (isset($category_id)) @if ($category_id != 0) @else selected="selected"@endif @endif value='0'>All Category</option>
+                                    <option
+                                        @if (isset($category_id)) @if ($category_id != 0) @else selected="selected" @endif
+                                        @endif value='0'>All Category</option>
                                     @foreach ($main_categories as $category)
-                                        <option @if (isset($category_id)) @if ($category_id == $category->id) selected='selected' @endif @endif value="{{ $category->id }}">
+                                        <option
+                                            @if (isset($category_id)) @if ($category_id == $category->id) selected='selected' @endif
+                                            @endif value="{{ $category->id }}">
                                             {{ $category->name }}</option>
                                     @endforeach
                                 </select>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\MainCategories;
 use App\Models\Product;
 use App\Models\SubCategories;
+use App\Models\Cart;
+use App\Models\CartProduct;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -44,7 +46,12 @@ class HomeController extends Controller
         return view('front.pages.product', compact(['product']));
     }
 
-    public function search(){
-        
+    public function get_cart(){
+        $cart = Cart::with(['cart_product' => function ($q)
+        {
+            $q->with('product');
+        }])
+        ->where('user_id', 1)->first();
+        return view('front.pages.cart', compact('cart'));
     }
 }
