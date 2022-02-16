@@ -1,6 +1,23 @@
 @extends('layouts.site')
 
 @section('content')
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bread-inner">
+                        <ul class="bread-list">
+                            <li><a href="{{ route('home') }}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li class="active">Cart</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
     <div class="shopping-cart section">
         <div class="container">
             <div class="row">
@@ -20,7 +37,8 @@
                         <tbody>
                             @foreach ($cart->cart_product as $product)
                                 <tr>
-                                    <td class="image" data-title="No"><img src="{{ $product->photo }}" alt="#">
+                                    <td class="image" data-title="No"><img src="{{ $product->product->photo }}"
+                                            alt="#">
                                     </td>
                                     <td class="product-des" data-title="Description">
                                         <p class="product-name"><a
