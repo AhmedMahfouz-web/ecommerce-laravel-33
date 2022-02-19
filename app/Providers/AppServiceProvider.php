@@ -28,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('money', function ($amount) {
             return "<?php echo '$' . number_format($amount, 2); ?>";
         });
-        View::share('main_categories', getHeader());
+        View::share(['main_categories' => getHeader(), 'cart' => getCart()]);
     }
 }

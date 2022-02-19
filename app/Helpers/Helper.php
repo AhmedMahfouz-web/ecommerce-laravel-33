@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\MainCategories;
+use App\Models\Cart;
 
 function get_languages()
 {
@@ -52,16 +53,24 @@ function getHeader()
     $locale_language = get_locale_language();
         
     return 
-    MainCategories::with(['subCategories' => function ($q) {
+    MainCategories::with([
+        'subCategories' => function ($q) {
             $q->with('sub_sub_categories');
-        }])
-            ->with(
-                ['products' => function ($q) {
+        },
+        'products' => function ($q) {
                     $q->select('*')->take(100);
-                }]
-            )
+        }
+    ])
             ->where('translation_lang', $locale_language)
             ->active()
             ->select('id', 'name', 'slug')
             ->get();
+}
+
+function getCart()
+{    
+    return 
+    Cart::with(['cart_product' => function($q){
+        $q->with('product');
+    }])->withCount('cart_product')->where('user_id', 1)->first();
 }

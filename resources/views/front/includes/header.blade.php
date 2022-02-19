@@ -91,31 +91,27 @@
                                     aria-hidden="true"></i></a>
                         </div>
                         <div class="sinlge-bar shopping">
-                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span
-                                    class="total-count">2</span></a>
+                            <a href="{{ route('get_cart') }}" class="single-icon"><i class="ti-bag"></i>
+                                <span class="total-count">{{ $cart->cart_product_count }}</span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <div class="dropdown-cart-header">
-                                    <span>2 Items</span>
-                                    <a href="#">View Cart</a>
+                                    <span>{{ $cart->cart_product_count }} Items</span>
+                                    <a href="{{ route('get_cart') }}">View Cart</a>
                                 </div>
                                 <ul class="shopping-list">
-                                    <li>
-                                        <a href="#" class="remove" title="Remove this item"><i
-                                                class="fa fa-remove"></i></a>
-                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70"
-                                                alt="#"></a>
-                                        <h4><a href="#">Woman Ring</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="remove" title="Remove this item"><i
-                                                class="fa fa-remove"></i></a>
-                                        <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70"
-                                                alt="#"></a>
-                                        <h4><a href="#">Woman Necklace</a></h4>
-                                        <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                    </li>
+                                    @foreach ($cart->cart_product as $product)
+                                        <li>
+                                            <a href="#" class="remove" title="Remove this item"><i
+                                                    class="fa fa-remove"></i></a>
+                                            <a class="cart-img" href="#"><img
+                                                    src="{{ $product->product->photo }}" alt="#"></a>
+                                            <h4><a href="#">{{ $product->product->title }}</a></h4>
+                                            <p class="quantity">{{ $product->qty }} - <span
+                                                    class="amount">${{ $product->product->current_price * $product->qty }}</span>
+                                            </p>
+                                        </li>
+                                    @endforeach
                                 </ul>
                                 <div class="bottom">
                                     <div class="total">
