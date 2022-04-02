@@ -46,12 +46,4 @@ class HomeController extends Controller
         return view('front.pages.product', compact(['product']));
     }
 
-    public function get_cart(){
-        $cart = Cart::with(['cart_product' => function ($q)
-        {
-            $q->with('product');
-        }])
-        ->where('user_id', 1)->first();
-        return view('front.pages.cart', compact('cart'));
-    }
 }

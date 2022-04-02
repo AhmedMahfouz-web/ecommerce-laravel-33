@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::domain(env('APP_URL'))->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
-    Route::get('/cart', 'CartController@index');
+    Route::get('/cart', [CartController::class, 'get_cart'])->name('get_cart');
     Route::get('/add_to_cart/{product}', 'CartController@add_to_cart')->name('add_to_cart');
+    Route::delete('/remove_from_cart/{product}', 'CartController@remove_from_cart')->name('remove_from_cart');
 
     Route::get('/product/{product}', [HomeController::class, 'product'])->name('product');
 
-    Route::get('/cart', [HomeController::class, 'get_cart'])->name('get_cart');
 
 
     Route::group(['prefix' => 'vendor'], function () {

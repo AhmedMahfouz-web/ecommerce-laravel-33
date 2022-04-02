@@ -36,7 +36,7 @@
                         </thead>
                         <tbody>
                             @foreach ($cart->cart_product as $product)
-                                <tr>
+                                <tr class="product-tr">
                                     <td class="image" data-title="No"><img src="{{ $product->product->photo }}"
                                             alt="#">
                                     </td>
@@ -76,8 +76,11 @@
                                     <input type="hidden" class="old-total-price" data-title="Total"
                                         value="{{ number_format($product->qty * $product->product->old_price, 2, '.', ',') }}">
 
-                                    <td class="action" data-title="Remove"><a href="#"><i
-                                                class="ti-trash remove-icon"></i></a></td>
+                                    <td class="action" data-title="Remove">
+                                        <a href="/remove_from_cart/{{ $product->product->slug }}"
+                                            class="remove remove-from-cart remove-item-cart" title="Remove this item"><i
+                                                class="fa fa-remove"></i></a>
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -130,22 +133,72 @@
 
 @section('javascript')
     <script>
-        let total_price = 0;
-        let totals = document.querySelectorAll('.total-price');
-        totals.forEach(total => {
-            total = total.textContent.replace(',', '')
-            total_price += parseFloat(total);
-        });
-        const sub_total = document.querySelector('#subtotal');
-        sub_total.textContent += total_price;
+        const calc_total = () => {
+            let total_price = 0;
+            let totals = document.querySelectorAll('.total-price');
+            totals.forEach(total => {
+                total = total.textContent.replace(',', '')
+                total_price += parseFloat(total);
+            });
+            const sub_total = document.querySelector('#subtotal');
+            sub_total.textContent = total_price + ' <b>LE</b>';
 
-        let old_total_price = 0;
-        let old_totals = document.querySelectorAll('.old-total-price');
-        old_totals.forEach(old_total => {
-            old_total = old_total.value.replace(',', '')
-            old_total_price += parseFloat(old_total);
+            let old_total_price = 0;
+            let old_totals = document.querySelectorAll('.old-total-price');
+            old_totals.forEach(old_total => {
+                old_total = old_total.value.replace(',', '')
+                old_total_price += parseFloat(old_total);
+            });
+            const saving = document.querySelector('#saving');
+            saving.textContent = (parseFloat(old_total_price) - parseFloat(total_price)) + ' <b>LE</b>';
+        }
+
+        calc_total();
+
+
+        // Remove Item From Cart
+        const remove_from_cart_btns = document.querySelectorAll('.remove-item-cart');
+        const product_tr = document.querySelectorAll('.product-tr');
+        let real_index = 0;
+
+        remove_from_cart_btns.forEach((remove_from_cart, index) => {
+            remove_from_cart.addEventListener('click',
+                function destroy_from_cart(e) {
+                    e.preventDefault();
+
+                    // const new_index = remove_from_cart_btns.length - 1
+                    // if (new_index % 2 == 0) {
+                    //     real_index = index - (new_index / 2);
+                    // } else {
+                    //     real_index = index - ((new_index - 1) / 2);
+                    // }
+
+                    // console.log(new_index);
+                    // console.log(index);
+                    // console.log(real_index);
+
+                    $.ajax({
+                        type: 'delete',
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        url: this.getAttribute('href'),
+                        success: function(data) {
+                            product_tr[index].remove();
+                            calc_total();
+                            $.notify(data.response, {
+                                delay: 500,
+                                timer: 2000,
+                                animate: {
+                                    enter: 'animated bounceIn',
+                                    exit: 'animated bounceOut'
+                                },
+                                type: 'success',
+                                newest_on_top: true,
+                            }, );
+                        }
+                    });
+                })
         });
-        const saving = document.querySelector('#saving');
-        saving.textContent += (parseFloat(old_total_price) - parseFloat(total_price));
     </script>
 @endsection

@@ -14,10 +14,13 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $cart = Cart::where('user_id', 1)->with('cart_product')->with('product');
-        return dd($cart);
+    public function get_cart(){
+        $cart = Cart::with(['cart_product' => function ($q)
+        {
+            $q->with('product');
+        }])
+        ->where('user_id', 1)->first();
+        return view('front.pages.cart', compact('cart'));
     }
 
     public function add_to_cart($slug){
@@ -33,77 +36,27 @@ class CartController extends Controller
             
             if($cart_product == null){
                 $cart_product = CartProduct::create(['cart_id' => $cart->id, 'product_id' => $product->id, 'qty' => '1']);
-                return response()->json(array('response'=> 'Successfuly Added'), 200);
+                $data = [
+                    'response' => 'successfuly added',
+                    'cart_product' => [
+                        'product_name' => $product->title,
+                        'qty' => '1',
+                    ]
+                    ];
+
+                return response()->json($data, 200);
             } else{
                 $cart_product->increment('qty');
-                return response()->json(array('response'=> 'Successfuly Added'), 200);
+                return response()->json(array('response' => 'Successfuly Added'), 200);
             }
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function remove_from_cart($slug){
+        $cart = Cart::where('user_id', 1)->first();
+        $product = Product::where('slug', $slug)->first();
+        $cart_product = CartProduct::where(['cart_id' => $cart->id, 'product_id' => $product->id])->delete();
+        return response()->json(array('response' => 'Successfuly Removed'), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cart $cart)
-    {
-        //
-    }
 }

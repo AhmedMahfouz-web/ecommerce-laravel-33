@@ -101,12 +101,16 @@
                                 </div>
                                 <ul class="shopping-list">
                                     @foreach ($cart->cart_product as $product)
-                                        <li>
-                                            <a href="#" class="remove" title="Remove this item"><i
+                                        <li class="header-cart-item">
+                                            <a href="/remove_from_cart/{{ $product->product->slug }}"
+                                                class="remove remove-from-cart" title="Remove this item"><i
                                                     class="fa fa-remove"></i></a>
-                                            <a class="cart-img" href="#"><img
+                                            <a class="cart-img"
+                                                href="{{ route('product', $product->product->slug) }}"><img
                                                     src="{{ $product->product->photo }}" alt="#"></a>
-                                            <h4><a href="#">{{ $product->product->title }}</a></h4>
+                                            <h4><a
+                                                    href="{{ route('product', $product->product->slug) }}">{{ $product->product->title }}</a>
+                                            </h4>
                                             <p class="quantity">{{ $product->qty }} - <span
                                                     class="amount">${{ $product->product->current_price * $product->qty }}</span>
                                             </p>

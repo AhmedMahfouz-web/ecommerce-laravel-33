@@ -657,6 +657,7 @@
 
 @section('javascript')
     <script>
+        //Add item To Cart
         const add_to_cart_btns = document.querySelectorAll('.add-to-cart');
 
         add_to_cart_btns.forEach(add_to_cart => {
@@ -681,6 +682,40 @@
                         }
                     });
                 })
+        });
+        let destroy_from_cart = (index) => {
+
+            $.ajax({
+                type: 'Delete',
+                data: {
+                    "_token": "{{ csrf_token() }}"
+                },
+                url: remove_from_cart_btns[index].getAttribute('href'),
+                success: function(data) {
+                    header_cart_item[index].remove();
+                    $.notify(data.response, {
+                        delay: 500,
+                        timer: 2000,
+                        animate: {
+                            enter: 'animated bounceIn',
+                            exit: 'animated bounceOut'
+                        },
+                        type: 'success',
+                        newest_on_top: true,
+                    }, );
+                }
+            })
+        }
+
+        // Remove Item From Cart
+        const remove_from_cart_btns = document.querySelectorAll('.remove-from-cart');
+        const header_cart_item = document.querySelectorAll('.header-cart-item');
+
+        remove_from_cart_btns.forEach((remove_from_cart, index) => {
+            remove_from_cart.addEventListener('click', function(e) {
+                e.preventDefault();
+                destroy_from_cart(index);
+            })
         });
     </script>
 @endsection
