@@ -15,12 +15,8 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function get_cart(){
-        $cart = Cart::with(['cart_product' => function ($q)
-        {
-            $q->with('product');
-        }])
-        ->where('user_id', 1)->first();
-        return view('front.pages.cart', compact('cart'));
+        // Cart Logic is on the Helper File
+        return view('front.pages.cart');
     }
 
     public function add_to_cart($slug){
@@ -41,7 +37,10 @@ class CartController extends Controller
                     'cart_product' => [
                         'product_name' => $product->title,
                         'qty' => '1',
-                    ]
+                        'price' => $product->current_price,
+                        'img' => $product->photo,
+                        'slug' => $product->slug,
+                        ],
                     ];
 
                 return response()->json($data, 200);
@@ -57,6 +56,10 @@ class CartController extends Controller
         $product = Product::where('slug', $slug)->first();
         $cart_product = CartProduct::where(['cart_id' => $cart->id, 'product_id' => $product->id])->delete();
         return response()->json(array('response' => 'Successfuly Removed'), 200);
+    }
+
+    public function increase_qty($slug){
+        
     }
 
 }

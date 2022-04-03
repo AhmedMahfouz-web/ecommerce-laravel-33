@@ -14,7 +14,7 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'title', 'vendor_id', 'category_id', 'sub_category_id', 'description', 'current_price', 'old_price', 'qty'
+        'title', 'vendor_id', 'category_id', 'sub_category_id', 'description', 'current_price', 'old_price', 'qty', 'photo'
     ];
 
     public function scopeSelection($query)

@@ -19,8 +19,9 @@ Route::domain(env('APP_URL'))->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('/cart', [CartController::class, 'get_cart'])->name('get_cart');
-    Route::get('/add_to_cart/{product}', 'CartController@add_to_cart')->name('add_to_cart');
+    Route::post('/add_to_cart/{product}', 'CartController@add_to_cart')->name('add_to_cart');
     Route::delete('/remove_from_cart/{product}', 'CartController@remove_from_cart')->name('remove_from_cart');
+    Route::put('/cart/increase/{product}', 'CartController@remove_from_cart')->name('remove_from_cart');
 
     Route::get('/product/{product}', [HomeController::class, 'product'])->name('product');
 

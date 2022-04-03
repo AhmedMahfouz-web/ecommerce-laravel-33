@@ -659,6 +659,7 @@
     <script>
         //Add item To Cart
         const add_to_cart_btns = document.querySelectorAll('.add-to-cart');
+        const shopping_list = document.querySelector('#shopping-list');
 
         add_to_cart_btns.forEach(add_to_cart => {
             add_to_cart.addEventListener('click',
@@ -666,9 +667,13 @@
                     e.preventDefault();
 
                     $.ajax({
-                        type: 'GET',
+                        type: 'POST',
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
                         url: this.getAttribute('href'),
                         success: function(data) {
+                            console.log(data.cart_product)
                             $.notify(data.response, {
                                 delay: 500,
                                 timer: 2000,
@@ -679,6 +684,24 @@
                                 type: 'success',
                                 newest_on_top: true,
                             }, );
+                            console.log(data.cart_product.slug)
+                            shopping_list.innerHTML += `<li class="header-cart-item">
+                                                        <a href="/remove_from_cart/${data.cart_product.slug}"
+                                                            class="remove remove-from-cart" title="Remove this item"><i
+                                                                class="fa fa-remove"></i></a>
+                                                        <a class="cart-img"
+                                                            href="/product/${data.cart_product.slug}"><img
+                                                                src="${data.cart_product.img}" alt="#"></a>
+                                                        <h4><a
+                                                                href="/product/${data.cart_product.slug}">${data.cart_product.product_name}</a>
+                                                        </h4>
+                                                        <p class="quantity">${data.cart_product.qty} - <span
+                                                                class="amount">${parseFloat(data.cart_product.price) * parseFloat(data.cart_product.qty)} <b>LE</b></span>
+                                                        </p>
+                                                    </li>`;
+                            remove_from_cart_btns = document.querySelectorAll('.remove-from-cart');
+                            header_cart_item = document.querySelectorAll('.header-cart-item');
+                            refresh_remove_btns();
                         }
                     });
                 })
@@ -708,14 +731,17 @@
         }
 
         // Remove Item From Cart
-        const remove_from_cart_btns = document.querySelectorAll('.remove-from-cart');
-        const header_cart_item = document.querySelectorAll('.header-cart-item');
+        let remove_from_cart_btns = document.querySelectorAll('.remove-from-cart');
+        let header_cart_item = document.querySelectorAll('.header-cart-item');
 
-        remove_from_cart_btns.forEach((remove_from_cart, index) => {
-            remove_from_cart.addEventListener('click', function(e) {
-                e.preventDefault();
-                destroy_from_cart(index);
-            })
-        });
+        let refresh_remove_btns = () => {
+            remove_from_cart_btns.forEach((remove_from_cart, index) => {
+                remove_from_cart.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    destroy_from_cart(index);
+                })
+            });
+        }
+        refresh_remove_btns();
     </script>
 @endsection

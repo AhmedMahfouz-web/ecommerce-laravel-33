@@ -112,9 +112,9 @@
                                 <div class="right">
                                     <ul>
                                         <li>Cart Subtotal<span id="subtotal">$</span></li>
-                                        <li>Shipping<span>Free</span></li>
+                                        <li>Shipping<span id="shipping">Free</span></li>
                                         <li>You Save<span id="saving">$</span></li>
-                                        <li class="last">You Pay<span>$310.00</span></li>
+                                        <li class="last">You Pay<span class="total-cart">$310.00</span></li>
                                     </ul>
                                     <div class="button5">
                                         <a href="#" class="btn">Checkout</a>
@@ -141,7 +141,7 @@
                 total_price += parseFloat(total);
             });
             const sub_total = document.querySelector('#subtotal');
-            sub_total.textContent = total_price + ' <b>LE</b>';
+            sub_total.innerHTML = total_price + ' <b>LE</b>';
 
             let old_total_price = 0;
             let old_totals = document.querySelectorAll('.old-total-price');
@@ -150,14 +150,23 @@
                 old_total_price += parseFloat(old_total);
             });
             const saving = document.querySelector('#saving');
-            saving.textContent = (parseFloat(old_total_price) - parseFloat(total_price)) + ' <b>LE</b>';
+            saving.innerHTML = (parseFloat(old_total_price) - parseFloat(total_price)) + ' <b>LE</b>';
+
+            const total_cart = document.querySelectorAll('.total-cart');
+            const shipping = document.querySelector('#shipping');
+            total_cart.forEach(total_cart_element => {
+                total_cart_element.innerHTML = total_price + ' <b>LE</b>';
+            })
+
         }
 
-        calc_total();
+        document.addEventListener('DOMContentLoaded', function() {
+            calc_total();
+        }, false);;
 
 
         // Remove Item From Cart
-        const remove_from_cart_btns = document.querySelectorAll('.remove-item-cart');
+        let remove_from_cart_btns = document.querySelectorAll('.remove-item-cart');
         const product_tr = document.querySelectorAll('.product-tr');
         let real_index = 0;
 

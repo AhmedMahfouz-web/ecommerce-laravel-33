@@ -99,7 +99,7 @@
                                     <span>{{ $cart->cart_product_count }} Items</span>
                                     <a href="{{ route('get_cart') }}">View Cart</a>
                                 </div>
-                                <ul class="shopping-list">
+                                <ul class="shopping-list" id="shopping-list">
                                     @foreach ($cart->cart_product as $product)
                                         <li class="header-cart-item">
                                             <a href="/remove_from_cart/{{ $product->product->slug }}"
