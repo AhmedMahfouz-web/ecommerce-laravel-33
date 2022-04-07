@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AddressesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,9 @@ Route::domain(env('APP_URL'))->group(function () {
     Route::post('/add_to_cart/{product}', 'CartController@add_to_cart')->name('add_to_cart');
     Route::delete('/remove_from_cart/{product}', 'CartController@remove_from_cart')->name('remove_from_cart');
     Route::put('/cart/increase/{product}', 'CartController@remove_from_cart')->name('remove_from_cart');
+
+    Route::get('/checkout', [TransactionController::class, 'get_checkout'])->name('get_checkout');
+    Route::post('/store_address', [AddressesController::class, 'store'])->name('add_address');
 
     Route::get('/product/{product}', [HomeController::class, 'product'])->name('product');
 
