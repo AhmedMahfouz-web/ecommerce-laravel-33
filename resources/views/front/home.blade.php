@@ -108,7 +108,8 @@
                                                                 </div>
                                                                 <div class="product-action-2">
                                                                     <a title="Add to cart" class="add-to-cart"
-                                                                        href="/add_to_cart/{{ $product->slug }}">Add to
+                                                                        href="{{ route('add_to_cart', $product->slug) }}">Add
+                                                                        to
                                                                         cart</a>
                                                                 </div>
                                                             </div>
