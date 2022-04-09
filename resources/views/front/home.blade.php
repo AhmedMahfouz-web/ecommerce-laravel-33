@@ -666,13 +666,14 @@
             add_to_cart.addEventListener('click',
                 function send_to_cart(e) {
                     e.preventDefault();
-
+                    false_url = this.getAttribute('href');
+                    url = false_url.replace("http", "https")
                     $.ajax({
                         type: 'POST',
                         data: {
                             "_token": "{{ csrf_token() }}"
                         },
-                        url: this.getAttribute('href'),
+                        url: url,
                         success: function(data) {
                             console.log(data.cart_product)
                             $.notify(data.response, {
